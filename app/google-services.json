@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "605596846691",
+    "project_id": "capstone-ruang-opini",
+    "storage_bucket": "capstone-ruang-opini.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605596846691:android:9d1d6baf2349ffe4e28656",
+        "android_client_info": {
+          "package_name": "id.ruangopini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605596846691-n519370uuhcpu0292m0s4m3lt2a7vftd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-3LH5eqPGdkpbP-F1hI7raUiS0F5Zsog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605596846691-n519370uuhcpu0292m0s4m3lt2a7vftd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

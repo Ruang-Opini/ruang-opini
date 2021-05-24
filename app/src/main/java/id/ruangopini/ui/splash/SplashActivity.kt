@@ -6,15 +6,24 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import id.ruangopini.MainActivity
 import id.ruangopini.R
 import id.ruangopini.databinding.ActivitySplashBinding
+import id.ruangopini.ui.register.createaccount.CreateAccountActivity
 import id.ruangopini.utils.Helpers.isDarkMode
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
+@ObsoleteCoroutinesApi
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
 
+    @ExperimentalCoroutinesApi
+    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -25,9 +34,12 @@ class SplashActivity : AppCompatActivity() {
         ) { crossfade(true) }
 
         Handler(Looper.getMainLooper()).postDelayed({
-            // TODO: 5/23/2021 check if user already login or not, if not start activity to login
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            Firebase.auth.currentUser.let {
+                if (it != null) startActivity(Intent(this, MainActivity::class.java))
+                // TODO: 5/23/2021 directed to login activity
+                else startActivity(Intent(this, CreateAccountActivity::class.java))
+                finish()
+            }
         }, 2000)
     }
 }

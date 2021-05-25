@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -47,8 +48,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
     // coil
-    implementation "io.coil-kt:coil:1.1.1"
+    implementation 'io.coil-kt:coil:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // ktx artifact
@@ -58,4 +66,17 @@ dependencies {
     // android lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
+    // coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.0-native-mt'
+
+    // image picker
+    implementation 'com.github.dhaval2404:imagepicker:2.0'
+
+    // sweet-alert-dialog
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 }

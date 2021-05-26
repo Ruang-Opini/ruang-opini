@@ -11,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 import id.ruangopini.data.model.User
 import id.ruangopini.data.repo.State
 import id.ruangopini.data.repo.remote.firebase.auth.AuthRepository
-import id.ruangopini.data.repo.remote.firebase.firestore.FirestoreUserRepository
+import id.ruangopini.data.repo.remote.firebase.firestore.user.FirestoreUserRepository
 import id.ruangopini.utils.DialogHelpers
 import id.ruangopini.utils.Helpers
 import kotlinx.coroutines.flow.collect

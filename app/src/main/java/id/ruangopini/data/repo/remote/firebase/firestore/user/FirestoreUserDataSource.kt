@@ -1,4 +1,4 @@
-package id.ruangopini.data.repo.remote.firebase.firestore
+package id.ruangopini.data.repo.remote.firebase.firestore.user
 
 import id.ruangopini.data.model.User
 import id.ruangopini.data.repo.State

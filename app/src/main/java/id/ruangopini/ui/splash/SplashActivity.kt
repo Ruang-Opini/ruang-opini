@@ -36,8 +36,10 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             Firebase.auth.currentUser.let {
                 if (it != null) startActivity(Intent(this, MainActivity::class.java))
-                // TODO: 5/23/2021 directed to login activity
-                else startActivity(Intent(this, CreateAccountActivity::class.java))
+                else {
+                    // TODO: 5/26/2021 check if already watch intro or not, if already go to create login else go to intro
+                    startActivity(Intent(this, CreateAccountActivity::class.java))
+                }
                 finish()
             }
         }, 2000)

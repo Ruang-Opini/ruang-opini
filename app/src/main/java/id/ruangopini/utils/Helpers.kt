@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -78,4 +79,11 @@ object Helpers {
         }
     }
 
+    fun View.hideView() {
+        this.visibility = View.GONE
+    }
+
+    fun View.showView() {
+        this.visibility = View.VISIBLE
+    }
 }

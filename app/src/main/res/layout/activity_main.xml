@@ -6,13 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:background="?attr/colorOnPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <com.gauravk.bubblenavigation.BubbleNavigationLinearView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/tabHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:bt_active="true"
+            app:bt_colorActive="@color/secondary"
+            app:bt_colorInactive="@color/primary"
+            app:bt_icon="@drawable/ic_home"
+            app:bt_shape="@drawable/transition_background"
+            app:bt_title="Home" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/tabDiscuss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:bt_colorActive="@color/secondary"
+            app:bt_colorInactive="@color/primary"
+            app:bt_icon="@drawable/ic_discuss"
+            app:bt_shape="@drawable/transition_background"
+            app:bt_title="Diskusi" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/tabReference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:bt_colorActive="@color/secondary"
+            app:bt_colorInactive="@color/primary"
+            app:bt_icon="@drawable/ic_reference"
+            app:bt_shape="@drawable/transition_background"
+            app:bt_title="Referensi" />
+
+        <com.gauravk.bubblenavigation.BubbleToggleView
+            android:id="@+id/tabProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bt_colorActive="@color/secondary"
+            app:bt_colorInactive="@color/primary"
+            app:bt_icon="@drawable/ic_person"
+            app:bt_shape="@drawable/transition_background"
+            app:bt_title="Profil" />
+    </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

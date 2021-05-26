@@ -13,4 +13,8 @@ object DataHelpers {
             "The password is invalid or the user does not have a password." to "Password salah",
             "The given password is invalid. [ Password should be at least 6 characters ]" to "Password paling sedikit 6 karakter"
         )
+
+    val titleMainTab = listOf(
+        "Beranda", "Ruang Diskusi", "Referensi", "Profile"
+    )
 }

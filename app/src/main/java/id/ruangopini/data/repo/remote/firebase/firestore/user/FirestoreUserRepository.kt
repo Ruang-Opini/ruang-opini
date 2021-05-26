@@ -1,4 +1,4 @@
-package id.ruangopini.data.repo.remote.firebase.firestore
+package id.ruangopini.data.repo.remote.firebase.firestore.user
 
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore

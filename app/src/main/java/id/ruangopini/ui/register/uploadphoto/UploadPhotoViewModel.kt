@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import id.ruangopini.data.repo.State
-import id.ruangopini.data.repo.remote.firebase.firestore.FirestoreUserRepository
+import id.ruangopini.data.repo.remote.firebase.firestore.user.FirestoreUserRepository
 import id.ruangopini.data.repo.remote.firebase.storage.StorageUserRepository
 import id.ruangopini.utils.DialogHelpers
 import id.ruangopini.utils.Helpers

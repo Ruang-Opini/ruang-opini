@@ -79,4 +79,7 @@ dependencies {
 
     // sweet-alert-dialog
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+
+    // bottom nav
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
 }

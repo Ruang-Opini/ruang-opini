@@ -17,11 +17,10 @@ import id.ruangopini.utils.Helpers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class CreateAccountViewModel : ViewModel() {
-
-    // TODO: 5/24/2021 using koin dependency injection
-    private val auth = AuthRepository()
-    private val userRepo = FirestoreUserRepository()
+class CreateAccountViewModel(
+    private val authRepository: AuthRepository,
+    private val userRepo: FirestoreUserRepository
+) : ViewModel() {
 
     private var _isComplete = MutableLiveData<Boolean>()
     private val currentProgress = mutableListOf(false, false, false, false, false)
@@ -37,7 +36,7 @@ class CreateAccountViewModel : ViewModel() {
         isSuccess: () -> Unit
     ) = viewModelScope.launch {
         user.email?.let { mail ->
-            auth.signUpWithEmail(mail, password).collect {
+            authRepository.signUpWithEmail(mail, password).collect {
                 when (it) {
                     is State.Loading -> DialogHelpers.showLoadingDialog(activity, "Membuat Akun")
                     is State.Success -> it.data.let { map ->

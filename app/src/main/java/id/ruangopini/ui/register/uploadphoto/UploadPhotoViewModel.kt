@@ -17,11 +17,10 @@ import id.ruangopini.utils.STORAGE
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class UploadPhotoViewModel : ViewModel() {
-
-    // TODO: 5/24/2021 using koin dependency injection
-    private val storageUser = StorageUserRepository()
-    private val userRepo = FirestoreUserRepository()
+class UploadPhotoViewModel(
+    private val storageUser: StorageUserRepository,
+    private val userRepo: FirestoreUserRepository
+) : ViewModel() {
 
     fun uploadPhoto(uri: Uri, activity: Activity, isSuccess: () -> Unit) = viewModelScope.launch {
         // TODO: 5/24/2021 handle if login with google

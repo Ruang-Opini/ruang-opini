@@ -12,6 +12,7 @@ import id.ruangopini.domain.MainInteract
 import id.ruangopini.domain.MainUseCase
 import id.ruangopini.ui.base.dicussion.DiscussionViewModel
 import id.ruangopini.ui.base.reference.ReferenceViewModel
+import id.ruangopini.ui.policy.detail.DetailPolicyViewModel
 import id.ruangopini.ui.register.createaccount.CreateAccountViewModel
 import id.ruangopini.ui.register.uploadphoto.UploadPhotoViewModel
 import okhttp3.OkHttpClient
@@ -59,4 +60,5 @@ val viewModelModule = module {
     viewModel { DiscussionViewModel(get()) }
     viewModel { CreateAccountViewModel(get(), get()) }
     viewModel { UploadPhotoViewModel(get(), get()) }
+    viewModel { DetailPolicyViewModel(get()) }
 }

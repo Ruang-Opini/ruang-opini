@@ -25,6 +25,7 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
+import java.util.*
 
 object Helpers {
     fun Activity.isDarkMode(): Boolean =
@@ -110,6 +111,24 @@ object Helpers {
             maskColor = ContextCompat.getColor(context, R.color.outline_20)
             maskCornerRadius = 52f
         }
+    }
+
+    fun String.getUrlPath(): String {
+        return this.subSequence("https://peraturan.go.id/".length, this.length).toString()
+    }
+
+    fun String.getPdfName(): String {
+        return this.split("/").last()
+    }
+
+    fun String.toTitleCase(): String {
+        return buildString {
+            this@toTitleCase.split(" ").forEach {
+                append(it.lowercase().replaceFirstChar { char ->
+                    if (char.isLowerCase()) char.titlecase(Locale.getDefault()) else char.toString()
+                }).append(" ")
+            }
+        }.trim()
     }
 
 }

@@ -42,8 +42,8 @@ class ReferenceFragment : Fragment() {
     }
 
     private fun populateData(it: Category) {
-        val firstAdapter = PolicyAdapter(requireContext(), it.listType)
-        val secondAdapter = PolicyAdapter(requireContext(), it.listCategory)
+        val firstAdapter = PolicyAdapter(requireContext(), it.listType, 1)
+        val secondAdapter = PolicyAdapter(requireContext(), it.listCategory, 2)
 
         val mAdapter = ConcatAdapter(
             HeaderAdapter("Jenis Kebijakan"), firstAdapter,

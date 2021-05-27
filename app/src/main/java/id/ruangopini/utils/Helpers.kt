@@ -6,13 +6,19 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.faltenreich.skeletonlayout.Skeleton
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputLayout
+import id.ruangopini.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -86,4 +92,24 @@ object Helpers {
     fun View.showView() {
         this.visibility = View.VISIBLE
     }
+
+    @ColorInt
+    fun Context.getColorFromAttr(
+        @AttrRes attrColor: Int,
+        typedValue: TypedValue = TypedValue(),
+        resolveRefs: Boolean = true
+    ): Int {
+        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+        return typedValue.data
+    }
+
+    fun Skeleton.initSkeleton(context: Context) {
+        this.apply {
+            showShimmer = true
+            shimmerColor = context.getColorFromAttr(R.attr.colorPrimaryVariant)
+            maskColor = ContextCompat.getColor(context, R.color.outline_20)
+            maskCornerRadius = 52f
+        }
+    }
+
 }

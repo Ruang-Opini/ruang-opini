@@ -1,6 +1,8 @@
 package id.ruangopini.ui.policy.detail.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +27,12 @@ class PolicyDocumentAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val document = listDocument[position]
-        binding.tvDocName.text = document.getPdfName()
+        with(binding) {
+            tvDocName.text = document.getPdfName()
+            contentDocument.setOnClickListener {
+                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(document)))
+            }
+        }
     }
 
     override fun getItemCount(): Int = listDocument.size

@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/contentDocument"
+    style="@style/ItemsTouchable"
     android:layout_margin="4dp"
     android:background="@drawable/bg_rounded_rect_outline"
     android:padding="8dp">

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import coil.load
@@ -13,11 +12,12 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import id.ruangopini.MainActivity
 import id.ruangopini.databinding.ActivityUploadPhotoBinding
 import id.ruangopini.utils.Helpers.handleImagePicker
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UploadPhotoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUploadPhotoBinding
-    private val model: UploadPhotoViewModel by viewModels()
+    private val model: UploadPhotoViewModel by viewModel()
     private var photoUrl = ""
 
 // TODO: 5/24/2021 handle login with google

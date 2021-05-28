@@ -1,36 +1,34 @@
-package id.ruangopini.ui.base.dicussion
+package id.ruangopini.ui.base.reference
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.ruangopini.data.model.Discussion
+import id.ruangopini.data.model.Category
 import id.ruangopini.data.repo.State
-import id.ruangopini.data.repo.remote.firebase.firestore.discussion.FirestoreDiscussionRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import id.ruangopini.domain.MainUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class DiscussionViewModel(
-    private val repo: FirestoreDiscussionRepository
-) : ViewModel() {
+class ReferenceViewModel(private val useCase: MainUseCase) : ViewModel() {
 
-    private val _discussion = MutableLiveData<List<Discussion>>()
-    val discussion: LiveData<List<Discussion>> get() = _discussion
+    private val _policyCategory = MutableLiveData<Category>()
+    val policyCategory: LiveData<Category> get() = _policyCategory
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-    @ExperimentalCoroutinesApi
-    fun getLatestDiscussion(context: Context) = viewModelScope.launch {
-        repo.getLatestDiscussionRoom().collect {
+    fun getAllPolicyCategory() = viewModelScope.launch {
+        useCase.getAllPolicyCategory().collect {
             when (it) {
                 is State.Loading -> _isLoading.value = true
                 is State.Success -> it.data.let { data ->
+                    val listOfType = if (data.listType.isNotEmpty()) data.listType else listOf()
+                    val listOfCategory =
+                        if (data.listCategory.isNotEmpty()) data.listCategory else listOf()
                     _isLoading.value = false
-                    _discussion.value = if (data.isNotEmpty()) data else listOf()
+                    _policyCategory.value = Category(listOfType, listOfCategory)
                 }
                 is State.Failed -> it.message.let { error ->
                     _isLoading.value = false

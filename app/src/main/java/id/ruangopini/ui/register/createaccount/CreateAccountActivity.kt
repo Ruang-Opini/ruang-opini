@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import id.ruangopini.data.model.User
@@ -18,6 +17,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.regex.Pattern
 
 @FlowPreview
@@ -26,7 +26,7 @@ import java.util.regex.Pattern
 class CreateAccountActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateAccountBinding
-    private val model: CreateAccountViewModel by viewModels()
+    private val model: CreateAccountViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

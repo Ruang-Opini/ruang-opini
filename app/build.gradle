@@ -87,14 +87,14 @@ dependencies {
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     // Koin main features for Android (Scope,ViewModel ...)
-    implementation "io.insert-koin:koin-android:3.0.1"
+    implementation 'io.insert-koin:koin-android:3.0.2'
     // Koin Android - experimental builder extensions
-    implementation "io.insert-koin:koin-android-ext:3.0.1"
+    implementation 'io.insert-koin:koin-android-ext:3.0.2'
 
     // skeleton layout
     implementation 'com.faltenreich:skeletonlayout:2.1.0'

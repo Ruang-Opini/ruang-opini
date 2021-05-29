@@ -18,6 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RuangOpini">
+        <activity android:name=".ui.settings.changepassword.ChangePasswordActivity"></activity>
+        <activity android:name=".ui.settings.SettingsActivity" />
         <activity android:name=".ui.policy.detail.DetailPolicyActivity" />
         <activity android:name=".ui.register.uploadphoto.UploadPhotoActivity" />
         <activity android:name=".ui.register.createaccount.CreateAccountActivity" />

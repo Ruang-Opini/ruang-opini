@@ -18,6 +18,7 @@ import androidx.core.net.toUri
 import com.faltenreich.skeletonlayout.Skeleton
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.Timestamp
 import id.ruangopini.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -25,6 +26,7 @@ import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 object Helpers {
@@ -130,5 +132,14 @@ object Helpers {
             }
         }.trim()
     }
+
+    fun Timestamp.formatDate(format: String): String? {
+        return SimpleDateFormat(format, Locale.getDefault()).format(this.toDate().time)
+    }
+
+    fun String.toTimeStamp(format: String): Timestamp {
+        return Timestamp(SimpleDateFormat(format, Locale.getDefault()).parse(this))
+    }
+
 
 }

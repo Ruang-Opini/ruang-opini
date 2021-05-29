@@ -11,10 +11,12 @@ import id.ruangopini.data.repo.remote.retrofit.ApiService
 import id.ruangopini.domain.MainInteract
 import id.ruangopini.domain.MainUseCase
 import id.ruangopini.ui.base.dicussion.DiscussionViewModel
+import id.ruangopini.ui.base.profile.ProfileViewModel
 import id.ruangopini.ui.base.reference.ReferenceViewModel
 import id.ruangopini.ui.policy.detail.DetailPolicyViewModel
 import id.ruangopini.ui.register.createaccount.CreateAccountViewModel
 import id.ruangopini.ui.register.uploadphoto.UploadPhotoViewModel
+import id.ruangopini.ui.settings.changepassword.ChangePasswordViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -61,4 +63,6 @@ val viewModelModule = module {
     viewModel { CreateAccountViewModel(get(), get()) }
     viewModel { UploadPhotoViewModel(get(), get()) }
     viewModel { DetailPolicyViewModel(get()) }
+    viewModel { ChangePasswordViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get()) }
 }

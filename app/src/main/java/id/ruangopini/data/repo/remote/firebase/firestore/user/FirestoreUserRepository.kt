@@ -7,9 +7,9 @@ import id.ruangopini.data.model.User
 import id.ruangopini.data.repo.State
 import id.ruangopini.utils.COLLECTION
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 
 class FirestoreUserRepository : FirestoreUserDataSource {
@@ -32,6 +32,25 @@ class FirestoreUserRepository : FirestoreUserDataSource {
         val snapshot = instance.document(id).update("photoUrl", path)
         snapshot.await()
         if (snapshot.isSuccessful) emit(State.success(true))
+    }.catch {
+        emit(State.failed(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+    @ExperimentalCoroutinesApi
+    override fun getUserById(userId: String) = callbackFlow<State<User>> {
+        this.trySend(State.loading()).isSuccess
+        instance.document(userId).addSnapshotListener { value, error ->
+            if (error != null) {
+                trySend(State.failed(error.message ?: ""))
+                close(error)
+                return@addSnapshotListener
+            }
+
+            if (value != null && value.exists()) value.toObject(User::class.java)?.let {
+                this.trySend(State.success(it)).isSuccess
+            }
+        }
+        awaitClose()
     }.catch {
         emit(State.failed(it.message ?: ""))
     }.flowOn(Dispatchers.IO)

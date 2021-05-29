@@ -17,6 +17,10 @@ object STORAGE {
     const val ROOT_AVA = "photos/ava/"
 }
 
+object DateFormat {
+    const val PROFILE = "MMMM yyyy"
+}
+
 object PATH {
     const val AVA = "AVA_"
 }

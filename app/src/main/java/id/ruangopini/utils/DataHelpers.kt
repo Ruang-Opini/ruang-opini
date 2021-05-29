@@ -17,4 +17,7 @@ object DataHelpers {
     val titleMainTab = listOf(
         "Beranda", "Ruang Diskusi", "Referensi", "Profile"
     )
+
+    val introData = listOf(
+    )
 }

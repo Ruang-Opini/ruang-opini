@@ -13,4 +13,20 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
+
+    <style name="ItemsTouchable">
+        <item name="android:clickable">true</item>
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Theme.RuangOpini.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.RuangOpini.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.RuangOpini.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

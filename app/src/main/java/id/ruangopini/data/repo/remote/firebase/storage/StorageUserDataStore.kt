@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface StorageUserDataStore {
     fun uploadPhoto(uri: Uri, path: String): Flow<State<String>>
+    fun getImageUrl(path: String): Flow<State<Uri>>
 }

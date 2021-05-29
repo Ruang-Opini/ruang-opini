@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import id.ruangopini.databinding.ActivityMainBinding
 import id.ruangopini.ui.base.dicussion.DiscussionFragment
+import id.ruangopini.ui.base.profile.ProfileFragment
 import id.ruangopini.ui.base.reference.ReferenceFragment
 import id.ruangopini.utils.DataHelpers
 import id.ruangopini.utils.Helpers.hideView
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     Fragment(), // TODO: 5/26/2021 replace with home fragment  
                     DiscussionFragment.newInstance(),
                     ReferenceFragment.newInstance(),
-                    Fragment() // TODO: 5/26/2021 replace with profile fragment 
+                    ProfileFragment.newInstance()
                 )
             )
             registerOnPageChangeCallback(onPageChange)

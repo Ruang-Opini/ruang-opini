@@ -56,7 +56,7 @@ class CreateAccountViewModel(
 
     }
 
-    private fun recordDataUser(user: User, activity: Activity, isSuccess: () -> Unit) =
+    fun recordDataUser(user: User, activity: Activity, isSuccess: () -> Unit) =
         viewModelScope.launch {
             userRepo.createNewUser(user).collect {
                 when (it) {

@@ -9,26 +9,27 @@ import androidx.core.net.toUri
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import id.ruangopini.MainActivity
 import id.ruangopini.databinding.ActivityUploadPhotoBinding
 import id.ruangopini.utils.Helpers.handleImagePicker
+import id.ruangopini.utils.Helpers.showView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UploadPhotoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUploadPhotoBinding
     private val model: UploadPhotoViewModel by viewModel()
+    private var isLoginWithGoogle = false
     private var photoUrl = ""
-
-// TODO: 5/24/2021 handle login with google
-//  private var isLoginWithGoogle = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadPhotoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO: 5/24/2021 getLasGoogleSign and populate it
+        GoogleSignIn.getLastSignedInAccount(this)?.let { populateData(it) }
 
         with(binding) {
             ivPicture.setOnClickListener {
@@ -39,10 +40,28 @@ class UploadPhotoActivity : AppCompatActivity() {
 
             button.setOnClickListener {
                 if (photoUrl.isNotBlank()) {
-                    model.uploadPhoto(photoUrl.toUri(), this@UploadPhotoActivity) { moveToMain() }
+                    model.uploadPhoto(
+                        photoUrl.toUri(),
+                        isLoginWithGoogle,
+                        this@UploadPhotoActivity
+                    ) {
+                        moveToMain()
+                    }
                 } else moveToMain()
             }
         }
+    }
+
+    private fun populateData(it: GoogleSignInAccount) = with(binding) {
+        isLoginWithGoogle = true
+        val img = it.photoUrl.toString().split("=")
+        photoUrl = if (img.size == 2) img[0] else it.photoUrl.toString()
+        button.text = "Gunakan"
+        ivProfile.load(photoUrl) {
+            crossfade(true)
+            transformations(CircleCropTransformation())
+        }
+        ivBlackBackground.showView()
     }
 
     private val activityForResult = registerForActivityResult(
@@ -56,6 +75,7 @@ class UploadPhotoActivity : AppCompatActivity() {
                     crossfade(true)
                     transformations(CircleCropTransformation())
                 }
+                ivBlackBackground.showView()
             }
         }
     }

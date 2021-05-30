@@ -1,11 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('keystore.jks')
+            storePassword 'android'
+            keyAlias 'ruangopini'
+            keyPassword 'android'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -17,12 +25,14 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -56,6 +66,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
+    // auth gso
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     // coil
     implementation 'io.coil-kt:coil:1.2.1'
@@ -98,4 +110,7 @@ dependencies {
 
     // skeleton layout
     implementation 'com.faltenreich:skeletonlayout:2.1.0'
+
+    // data store
+    implementation "androidx.datastore:datastore-preferences:1.0.0-beta01"
 }

@@ -2,7 +2,6 @@ package id.ruangopini.ui.register.createaccount
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +10,7 @@ import id.ruangopini.databinding.ActivityCreateAccountBinding
 import id.ruangopini.ui.register.uploadphoto.UploadPhotoActivity
 import id.ruangopini.utils.Helpers.afterTextChanged
 import id.ruangopini.utils.Helpers.getPlainText
+import id.ruangopini.utils.Helpers.hideView
 import id.ruangopini.utils.Helpers.showError
 import id.ruangopini.utils.Helpers.validateError
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,12 +27,23 @@ class CreateAccountActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateAccountBinding
     private val model: CreateAccountViewModel by viewModel()
+    private var isLoginGoogle = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        intent.extras?.getParcelable<User>(EXTRA_ACCOUNT)?.let {
+            isLoginGoogle = true
+            with(binding) {
+                tilEmail.hideView()
+                edtName.setText(it.name)
+            }
+            model.setProgress(0, true)
+            model.setProgress(2, true)
+        }
 
         model.isComplete.observe(this, { binding.btnCreateAccount.isEnabled = it })
 
@@ -61,15 +72,19 @@ class CreateAccountActivity : AppCompatActivity() {
                 val user = User(
                     edtName.getPlainText(), edtUsername.getPlainText(), edtEmail.getPlainText()
                 )
-                Log.d("TAG", "create user: $user")
-                model.createAccount(
+                if (!isLoginGoogle) model.createAccount(
                     user, binding.edtPassword.getPlainText(), this@CreateAccountActivity
-                ) {
-                    startActivity(Intent(applicationContext, UploadPhotoActivity::class.java))
-                    finish()
+                ) { toUploadPhoto() }
+                else model.recordDataUser(user, this@CreateAccountActivity) {
+                    toUploadPhoto()
                 }
             }
         }
+    }
+
+    private fun toUploadPhoto() {
+        startActivity(Intent(applicationContext, UploadPhotoActivity::class.java))
+        finish()
     }
 
     private fun validateConfirmPassword(it: String) = with(binding) {
@@ -109,5 +124,9 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun noSpecialChar(it: String): Boolean {
         val pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE)
         return !pattern.matcher(it).find()
+    }
+
+    companion object {
+        const val EXTRA_ACCOUNT = "extra_account"
     }
 }

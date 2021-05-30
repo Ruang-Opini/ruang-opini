@@ -22,22 +22,27 @@ class UploadPhotoViewModel(
     private val userRepo: FirestoreUserRepository
 ) : ViewModel() {
 
-    fun uploadPhoto(uri: Uri, activity: Activity, isSuccess: () -> Unit) = viewModelScope.launch {
-        // TODO: 5/24/2021 handle if login with google
-        val uid = Firebase.auth.currentUser?.uid ?: ""
-        val path = PATH.AVA.plus(uid)
-        storageUser.uploadPhoto(uri, buildString {
-            append(STORAGE.ROOT_AVA).append(uid).append("/").append(path)
-        }).collect {
-            when (it) {
-                is State.Loading -> DialogHelpers.showLoadingDialog(activity, "Mengunggah Foto")
-                is State.Success -> updatePhoto(path, activity) { isSuccess() }
-                is State.Failed -> {
-                    DialogHelpers.hideLoadingDialog()
-                    Helpers.showToast(activity, it.message)
+    fun uploadPhoto(
+        uri: Uri, isLoginWithGoogle: Boolean,
+        activity: Activity, isSuccess: () -> Unit
+    ) = viewModelScope.launch {
+        if (!isLoginWithGoogle) {
+            val uid = Firebase.auth.currentUser?.uid ?: ""
+            val path = PATH.AVA.plus(uid)
+            storageUser.uploadPhoto(uri, buildString {
+                append(STORAGE.ROOT_AVA).append(uid).append("/").append(path)
+            }).collect {
+                when (it) {
+                    is State.Loading -> DialogHelpers.showLoadingDialog(activity, "Mengunggah Foto")
+                    is State.Success -> updatePhoto(path, activity) { isSuccess() }
+                    is State.Failed -> {
+                        DialogHelpers.hideLoadingDialog()
+                        Helpers.showToast(activity, it.message)
+                    }
                 }
             }
-        }
+        } else updatePhoto(uri.toString(), activity) { isSuccess() }
+
     }
 
     private fun updatePhoto(path: String, activity: Activity, isSuccess: () -> Unit) =

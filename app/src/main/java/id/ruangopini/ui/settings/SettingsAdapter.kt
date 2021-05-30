@@ -7,17 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import id.ruangopini.MainActivity
 import id.ruangopini.data.model.ItemSetting
+import id.ruangopini.data.repo.remote.firebase.auth.AuthHelpers
 import id.ruangopini.databinding.ItemSettingsBinding
-import id.ruangopini.ui.register.createaccount.CreateAccountActivity
+import id.ruangopini.ui.login.LoginActivity
 import id.ruangopini.utils.DialogHelpers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
+@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
+@FlowPreview
 class SettingsAdapter(
     private val context: Context,
     private val listSettings: List<ItemSetting>
@@ -45,9 +45,9 @@ class SettingsAdapter(
                     DialogHelpers.showLoadingDialog(context as Activity, "Keluar...")
                     GlobalScope.launch {
                         delay(2000)
-                        Firebase.auth.signOut()
+                        AuthHelpers.signOut(context)
                         context.let {
-                            it.startActivity(Intent(it, CreateAccountActivity::class.java))
+                            it.startActivity(Intent(it, LoginActivity::class.java))
                             it.finishAffinity()
                         }
                     }

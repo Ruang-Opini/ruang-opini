@@ -41,16 +41,29 @@ class FirestoreUserRepository : FirestoreUserDataSource {
         this.trySend(State.loading()).isSuccess
         instance.document(userId).addSnapshotListener { value, error ->
             if (error != null) {
-                trySend(State.failed(error.message ?: ""))
+                trySend(State.failed(error.message ?: "")).isSuccess
                 close(error)
                 return@addSnapshotListener
             }
 
-            if (value != null && value.exists()) value.toObject(User::class.java)?.let {
-                this.trySend(State.success(it)).isSuccess
-            }
+            if (value != null && value.exists()) value.toObject(User::class.java).let {
+                this.trySend(State.success(it ?: User())).isSuccess
+            } else this.trySend(State.success(User())).isSuccess
         }
         awaitClose()
+    }.catch {
+        emit(State.failed(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+    override fun getUserByUsername(username: String) = flow {
+        emit(State.loading())
+        val snapshot = instance.whereEqualTo("username", username).get()
+        snapshot.await()
+        if (snapshot.isSuccessful) emit(
+            State.success(
+                snapshot.result?.toObjects(User::class.java)?.first() ?: User()
+            )
+        )
     }.catch {
         emit(State.failed(it.message ?: ""))
     }.flowOn(Dispatchers.IO)

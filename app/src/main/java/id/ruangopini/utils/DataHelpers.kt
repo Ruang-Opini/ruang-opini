@@ -1,5 +1,8 @@
 package id.ruangopini.utils
 
+import id.ruangopini.R
+import id.ruangopini.data.model.Intro
+
 object DataHelpers {
 
     /** this
@@ -16,5 +19,28 @@ object DataHelpers {
 
     val titleMainTab = listOf(
         "Beranda", "Ruang Diskusi", "Referensi", "Profile"
+    )
+
+    val listIntro = listOf(
+        Intro(
+            R.drawable.ic_intro_1,
+            "Sentimen Analisis",
+            "Dapatkan data jumlah pro, kontra, dan buzzer yang akurat tentang kebijakan yang sedang populer dibicarakan"
+        ),
+        Intro(
+            R.drawable.ic_intro_2,
+            "Ruang Diskusi",
+            "Buat atau bergabung  di Ruang Diskusi dengan memberikan komentar, upvote, dan downvote"
+        ),
+        Intro(
+            R.drawable.ic_intro_3,
+            "Referensi",
+            "Kesulitan mencari referensi yang terpercaya? Lihat referensi yang kami sediakan di halaman referensi"
+        ),
+        Intro(
+            R.drawable.ic_intro_4,
+            "Saatnya mencoba",
+            "Dapatkan kesempatan meninjau ulang kebijakan yang dibuat pemerintah bersama jaringan sosial dalam media Ruang Opini. Tak perlu takut untuk mengemukakan pendapat karena kami menyediakan referensi yang membuat pendapat anda kuat"
+        )
     )
 }

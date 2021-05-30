@@ -24,3 +24,7 @@ object DateFormat {
 object PATH {
     const val AVA = "AVA_"
 }
+
+enum class LoginState {
+    SUCCESS, WRONG_USERNAME, WRONG_PASSWORD
+}

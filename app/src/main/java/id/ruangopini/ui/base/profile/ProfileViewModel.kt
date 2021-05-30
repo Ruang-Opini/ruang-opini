@@ -2,6 +2,7 @@ package id.ruangopini.ui.base.profile
 
 import android.net.Uri
 import android.util.Log
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -49,17 +50,20 @@ class ProfileViewModel(
     }
 
     private fun loadAva(user: User) = viewModelScope.launch {
-        storageUserRepository.getImageUrl(
-            STORAGE.ROOT_AVA.plus(user.userId).plus("/").plus(user.photoUrl)
-        ).collect {
-            when (it) {
-                is State.Loading -> {
-                }
-                is State.Success -> {
-                    it.data.let { data -> _photoUrl.value = data }
-                }
-                is State.Failed -> {
-                    Log.d("TAG", "loadAva: failed = ${it.message}")
+        user.photoUrl.let { photo ->
+            if (photo?.subSequence(0, 3) != "AVA") _photoUrl.value = photo?.toUri()
+            else storageUserRepository.getImageUrl(
+                STORAGE.ROOT_AVA.plus(user.userId).plus("/").plus(user.photoUrl)
+            ).collect {
+                when (it) {
+                    is State.Loading -> {
+                    }
+                    is State.Success -> {
+                        it.data.let { data -> _photoUrl.value = data }
+                    }
+                    is State.Failed -> {
+                        Log.d("TAG", "loadAva: failed = ${it.message}")
+                    }
                 }
             }
         }

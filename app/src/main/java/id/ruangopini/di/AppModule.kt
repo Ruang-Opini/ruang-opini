@@ -13,6 +13,7 @@ import id.ruangopini.domain.MainUseCase
 import id.ruangopini.ui.base.dicussion.DiscussionViewModel
 import id.ruangopini.ui.base.profile.ProfileViewModel
 import id.ruangopini.ui.base.reference.ReferenceViewModel
+import id.ruangopini.ui.login.LoginViewModel
 import id.ruangopini.ui.policy.detail.DetailPolicyViewModel
 import id.ruangopini.ui.register.createaccount.CreateAccountViewModel
 import id.ruangopini.ui.register.uploadphoto.UploadPhotoViewModel
@@ -65,4 +66,5 @@ val viewModelModule = module {
     viewModel { DetailPolicyViewModel(get()) }
     viewModel { ChangePasswordViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
+    viewModel { LoginViewModel(get(), get()) }
 }

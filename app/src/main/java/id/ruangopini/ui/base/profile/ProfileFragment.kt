@@ -65,13 +65,25 @@ class ProfileFragment : Fragment() {
                 it.name?.let { name -> setupToolbar(name) }
             })
             model.photoUrl.observe(viewLifecycleOwner, {
-                // TODO: 5/28/2021 handle when using has no profile photo
-                ivAva.load(it) {
+                Log.d("TAG", "photoUrl: $it")
+                if (it != null) ivAva.load(it) {
                     crossfade(true)
                     transformations(CircleCropTransformation())
-                }
+                    error(R.drawable.ic_person)
+                    placeholder(R.drawable.ic_person)
+                } else setDefaultPhoto()
             })
             // TODO: 5/28/2021 load img banner
+        }
+    }
+
+    private fun setDefaultPhoto() {
+        binding.layoutUser.ivAva.apply {
+            load(R.drawable.ic_person) {
+                crossfade(true)
+                imageTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary)
+                transformations(CircleCropTransformation())
+            }
         }
     }
 
@@ -79,12 +91,6 @@ class ProfileFragment : Fragment() {
         var scrollRange = -1
         binding.appBarLayout.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
-                Log.d(
-                    "TAG",
-                    "setupToolbar: range = $scrollRange, offset = $verticalOffset, sum = ${
-                        scrollRange.plus(verticalOffset)
-                    }"
-                )
                 if (scrollRange == -1) scrollRange = barLayout?.totalScrollRange!!
                 (scrollRange.plus(verticalOffset) == 0).let {
                     binding.toolbar.apply {
@@ -98,7 +104,6 @@ class ProfileFragment : Fragment() {
                         )
                     }
                 }
-                Log.d("TAG", "setupToolbar: title = ${binding.toolbar.title}")
             })
 
         binding.toolbar.setOnMenuItemClickListener {

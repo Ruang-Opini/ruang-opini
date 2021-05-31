@@ -18,4 +18,6 @@ class HelpActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
     }
+
+
 }

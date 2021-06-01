@@ -21,4 +21,6 @@ class MainInteract(
 
     override suspend fun getDocumentPolicy(url: String): Flow<State<PolicyDocument>> =
         repository.getDocumentPolicy(url)
+
+    override suspend fun getTrending(): Flow<State<List<String>>> = repository.getTrending()
 }

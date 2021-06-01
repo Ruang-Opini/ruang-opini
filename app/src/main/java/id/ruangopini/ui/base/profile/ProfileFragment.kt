@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import id.ruangopini.R
 import id.ruangopini.databinding.FragmentProfileBinding
 import id.ruangopini.ui.base.dicussion.ContentDiscussionFragment
+import id.ruangopini.ui.editprofile.EditProfileActivity
 import id.ruangopini.ui.settings.SettingsActivity
 import id.ruangopini.utils.DateFormat
 import id.ruangopini.utils.Helpers
@@ -74,6 +75,9 @@ class ProfileFragment : Fragment() {
                 } else setDefaultPhoto()
             })
             // TODO: 5/28/2021 load img banner
+            btnEditProfile.setOnClickListener {
+                startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+            }
         }
     }
 

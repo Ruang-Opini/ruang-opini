@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.tasks.await
 
 class FirestoreDiscussionRepository : FirestoreDiscussionDataSource {
 
@@ -33,6 +34,15 @@ class FirestoreDiscussionRepository : FirestoreDiscussionDataSource {
                 this.trySend(State.success(discussions)).isSuccess
             }
         awaitClose()
+    }.catch {
+        emit(State.failed(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+    override fun createNewDiscussion(discussion: Discussion) = flow {
+        emit(State.loading())
+        val snapshot = instance.document().set(discussion)
+        snapshot.await()
+        if (snapshot.isSuccessful) emit(State.success(true)) else emit(State.success(false))
     }.catch {
         emit(State.failed(it.message ?: ""))
     }.flowOn(Dispatchers.IO)

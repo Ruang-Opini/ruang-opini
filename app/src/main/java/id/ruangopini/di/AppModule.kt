@@ -2,17 +2,21 @@ package id.ruangopini.di
 
 import id.ruangopini.data.repo.IMainRepository
 import id.ruangopini.data.repo.MainRepository
-import id.ruangopini.data.repo.remote.RemoteDataSource
+import id.ruangopini.data.repo.RemoteDataSource
 import id.ruangopini.data.repo.remote.firebase.auth.AuthRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.discussion.FirestoreDiscussionRepository
+import id.ruangopini.data.repo.remote.firebase.firestore.issue.FirestoreIssueRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.user.FirestoreUserRepository
 import id.ruangopini.data.repo.remote.firebase.storage.StorageUserRepository
 import id.ruangopini.data.repo.remote.retrofit.ApiService
+import id.ruangopini.data.repo.remote.retrofit.SentimentService
 import id.ruangopini.domain.MainInteract
 import id.ruangopini.domain.MainUseCase
 import id.ruangopini.ui.base.dicussion.DiscussionViewModel
+import id.ruangopini.ui.base.home.HomeViewModel
 import id.ruangopini.ui.base.profile.ProfileViewModel
 import id.ruangopini.ui.base.reference.ReferenceViewModel
+import id.ruangopini.ui.discussion.create.CreateDiscussionViewModel
 import id.ruangopini.ui.login.LoginViewModel
 import id.ruangopini.ui.policy.detail.DetailPolicyViewModel
 import id.ruangopini.ui.register.createaccount.CreateAccountViewModel
@@ -43,10 +47,19 @@ val networkModule = module {
             .build()
         retrofit.create(ApiService::class.java)
     }
+
+    single {
+        val sentimentRetrofit = Retrofit.Builder()
+            .baseUrl("https://ropin-sentiment-gateway-7q7gq5ib.uc.gateway.dev/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+        sentimentRetrofit.create(SentimentService::class.java)
+    }
 }
 
 val repoModule = module {
-    single { RemoteDataSource(get()) }
+    single { RemoteDataSource(get(), get()) }
     single<IMainRepository> { MainRepository(get()) }
 }
 
@@ -56,6 +69,7 @@ val useCaseModule = module {
     single { FirestoreUserRepository() }
     single { AuthRepository() }
     single { StorageUserRepository() }
+    single { FirestoreIssueRepository() }
 }
 
 val viewModelModule = module {
@@ -67,4 +81,6 @@ val viewModelModule = module {
     viewModel { ChangePasswordViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
+    viewModel { CreateDiscussionViewModel(get(), get()) }
+    viewModel { HomeViewModel(get()) }
 }

@@ -39,6 +39,7 @@ class CreateAccountActivity : AppCompatActivity() {
             isLoginGoogle = true
             with(binding) {
                 tilEmail.hideView()
+                edtEmail.setText(it.email)
                 edtName.setText(it.name)
             }
             model.setProgress(0, true)

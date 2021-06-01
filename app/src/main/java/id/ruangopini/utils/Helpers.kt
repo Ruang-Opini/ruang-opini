@@ -141,5 +141,7 @@ object Helpers {
         return Timestamp(SimpleDateFormat(format, Locale.getDefault()).parse(this))
     }
 
+    fun Int.reSize(percentage: Int) = (this.toFloat() * (percentage.toFloat().div(100.0))).toInt()
+
 
 }

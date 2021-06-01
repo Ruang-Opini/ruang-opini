@@ -1,16 +1,19 @@
-package id.ruangopini.data.repo.remote
+package id.ruangopini.data.repo
 
 import id.ruangopini.data.model.*
-import id.ruangopini.data.repo.State
 import id.ruangopini.data.repo.remote.retrofit.ApiService
+import id.ruangopini.data.repo.remote.retrofit.SentimentService
 import id.ruangopini.data.repo.remote.retrofit.response.toListPolicy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class RemoteDataSource(private val apiService: ApiService) {
-
+class RemoteDataSource(
+    private val apiService: ApiService,
+    private val sentimentService: SentimentService
+) {
     suspend fun getAllPolicyCategory(): Flow<State<Category>> =
         flow {
             emit(State.loading())
@@ -72,5 +75,19 @@ class RemoteDataSource(private val apiService: ApiService) {
         } catch (e: Exception) {
             emit(State.failed<PolicyDocument>(e.message.toString()))
         }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun getTrending() = flow<State<List<String>>> {
+        emit(State.loading())
+        val response = sentimentService.getTrending()
+        response.message.let { message ->
+            if (message != null) emit(State.success(listOf(message, response.code.toString())))
+            else response.trending.let {
+                val result = if (it?.isNotEmpty() == true) it else emptyList()
+                emit(State.success(result))
+            }
+        }
+    }.catch {
+        emit(State.failed(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

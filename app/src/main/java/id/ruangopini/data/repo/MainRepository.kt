@@ -3,7 +3,6 @@ package id.ruangopini.data.repo
 import id.ruangopini.data.model.Category
 import id.ruangopini.data.model.Policy
 import id.ruangopini.data.model.PolicyDocument
-import id.ruangopini.data.repo.remote.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
 
 class MainRepository(
@@ -20,4 +19,7 @@ class MainRepository(
 
     override suspend fun getDocumentPolicy(url: String): Flow<State<PolicyDocument>> =
         remoteDataSource.getDocumentPolicy(url)
+
+    override suspend fun getTrending(): Flow<State<List<String>>> =
+        remoteDataSource.getTrending()
 }

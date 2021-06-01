@@ -6,11 +6,12 @@ import com.google.firebase.firestore.DocumentId
 data class Discussion(
     val name: String? = null,
     val desc: String? = null,
-    val issueName: String? = null,
-    val issueId: String? = null,
-    val people: Int? = null,
-    val post: Int? = null,
-    val createdAt: Timestamp? = null,
+    val category: List<String>? = null,
+    var issueName: String? = null,
+    var issueId: String? = null,
+    val people: Int? = 0,
+    val post: Int? = 0,
+    val createdAt: Timestamp? = Timestamp.now(),
     @DocumentId
     val discussionId: String? = null,
 )

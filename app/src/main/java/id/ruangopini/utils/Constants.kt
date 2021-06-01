@@ -7,6 +7,7 @@ package id.ruangopini.utils
 object COLLECTION {
     const val USER = "user"
     const val DISCUSSION = "discussion"
+    const val ISSUE = "issue"
 }
 
 /**

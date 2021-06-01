@@ -37,7 +37,6 @@ class DetailPolicyActivity : AppCompatActivity() {
             val type = intent.extras?.getInt(EXTRA_TYPE, 1)
             if (type == 1) model.getPolicyByType(it.url.getUrlPath())
             else model.getPolicyByCategory(it.url.getUrlPath())
-
         }
 
         model.listPolicy.observe(this, {

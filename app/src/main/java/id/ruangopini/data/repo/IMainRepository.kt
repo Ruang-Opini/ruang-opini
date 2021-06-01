@@ -10,4 +10,6 @@ interface IMainRepository {
     suspend fun getPolicyByType(url: String): Flow<State<List<Policy>>>
     suspend fun getPolicyByCategory(url: String): Flow<State<List<Policy>>>
     suspend fun getDocumentPolicy(url: String): Flow<State<PolicyDocument>>
+
+    suspend fun getTrending(): Flow<State<List<String>>>
 }

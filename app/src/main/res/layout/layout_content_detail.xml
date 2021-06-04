@@ -46,9 +46,9 @@
                     android:layout_marginEnd="8dp"
                     android:progress="60"
                     app:indicatorSize="130dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView27"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvPercentNegative"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toStartOf="@+id/textView15"
+                    app:layout_constraintEnd_toStartOf="@+id/titleRespond"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPolicyName"
                     app:trackColor="@color/primary_20"
@@ -56,7 +56,7 @@
                     app:trackThickness="40dp" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/titleRespond"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -69,17 +69,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvPolicyName" />
 
                 <View
-                    android:id="@+id/view4"
+                    android:id="@+id/positiveView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/bg_circle"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTitlePositive"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                    app:layout_constraintTop_toTopOf="@+id/textView23" />
+                    app:layout_constraintStart_toStartOf="@+id/titleRespond"
+                    app:layout_constraintTop_toTopOf="@+id/tvTitlePositive" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/tvTitlePositive"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -87,45 +87,45 @@
                     android:text="Positif"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/view4"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                    app:layout_constraintStart_toEndOf="@+id/positiveView"
+                    app:layout_constraintTop_toBottomOf="@+id/titleRespond" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/tvPrecentPositive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="60%"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/textView23"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                    app:layout_constraintStart_toStartOf="@+id/tvTitlePositive"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitlePositive" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/tvAmountPositive"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="(3000)"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvPrecentPositive"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView24"
-                    app:layout_constraintTop_toTopOf="@+id/textView24" />
+                    app:layout_constraintStart_toEndOf="@+id/tvPrecentPositive"
+                    app:layout_constraintTop_toTopOf="@+id/tvPrecentPositive" />
 
                 <View
-                    android:id="@+id/view5"
+                    android:id="@+id/negativeView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/bg_circle"
                     android:backgroundTint="@color/primary_20"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView26"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTitleNegative"
                     app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                    app:layout_constraintTop_toTopOf="@+id/textView26" />
+                    app:layout_constraintStart_toStartOf="@+id/titleRespond"
+                    app:layout_constraintTop_toTopOf="@+id/tvTitleNegative" />
 
                 <TextView
-                    android:id="@+id/textView26"
+                    android:id="@+id/tvTitleNegative"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -133,34 +133,34 @@
                     android:text="Negatif"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/view4"
-                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                    app:layout_constraintStart_toEndOf="@+id/positiveView"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPrecentPositive" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/tvPercentNegative"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="40%"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/textView26"
-                    app:layout_constraintTop_toBottomOf="@+id/textView26" />
+                    app:layout_constraintStart_toStartOf="@+id/tvTitleNegative"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitleNegative" />
 
                 <TextView
-                    android:id="@+id/textView28"
+                    android:id="@+id/tvAmountNegative"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="(2000)"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView27"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvPercentNegative"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView24"
-                    app:layout_constraintTop_toTopOf="@+id/textView27" />
+                    app:layout_constraintStart_toEndOf="@+id/tvPrecentPositive"
+                    app:layout_constraintTop_toTopOf="@+id/tvPercentNegative" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/view2"
+                    android:id="@+id/buzzerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -171,14 +171,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator">
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/ivBuzzer"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView22"
+                        app:layout_constraintBottom_toBottomOf="@+id/buzzerPercentage"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toEndOf="@+id/textView22"
-                        app:layout_constraintStart_toStartOf="@+id/textView22"
-                        app:layout_constraintTop_toTopOf="@+id/textView22"
+                        app:layout_constraintEnd_toEndOf="@+id/buzzerPercentage"
+                        app:layout_constraintStart_toStartOf="@+id/buzzerPercentage"
+                        app:layout_constraintTop_toTopOf="@+id/buzzerPercentage"
                         app:layout_constraintVertical_bias="1.0"
                         app:srcCompat="@drawable/ic_buzzer" />
 
@@ -191,11 +191,11 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintStart_toEndOf="@+id/ivBuzzer"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView20"
+                        android:id="@+id/tvBuzzerInfo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -203,11 +203,11 @@
                         android:text="Trending ini aman dari buzzer"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintStart_toEndOf="@+id/ivBuzzer"
                         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
                     <TextView
-                        android:id="@+id/textView22"
+                        android:id="@+id/buzzerPercentage"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:gravity="center"
@@ -215,9 +215,9 @@
                         android:text="10%"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView20"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvBuzzerInfo"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintStart_toStartOf="@+id/view2"
+                        app:layout_constraintStart_toStartOf="@+id/buzzerView"
                         app:layout_constraintTop_toTopOf="@+id/textView19" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

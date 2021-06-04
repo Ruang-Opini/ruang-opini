@@ -43,4 +43,21 @@ object DataHelpers {
             "Dapatkan kesempatan meninjau ulang kebijakan yang dibuat pemerintah bersama jaringan sosial dalam media Ruang Opini. Tak perlu takut untuk mengemukakan pendapat karena kami menyediakan referensi yang membuat pendapat anda kuat"
         )
     )
+
+    fun getTextBuzzer(percentage: Int) = when (percentage) {
+        in 0..33 -> "Trending ini aman dari Buzzer"
+        in 34..66 -> "Trending ini rentan dari Buzzer"
+        in 67..100 -> "Trending ini terindikasi dibuat oleh Buzzer"
+        else -> "Trending ini aman dari Buzzer"
+    }
+
+    fun getColorBuzzer(percentBuzzer: Int) = when (percentBuzzer) {
+        in 0..33 -> R.color.info_safe
+        in 34..66 -> R.color.primary
+        in 67..100 -> R.color.info_warning
+        else -> R.color.info_safe
+    }
+
+    fun getTextColorBuzzer(color: Int) =
+        if (color == R.color.primary) R.color.black else R.color.white
 }

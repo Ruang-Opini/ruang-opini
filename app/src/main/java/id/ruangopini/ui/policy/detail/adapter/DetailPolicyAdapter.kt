@@ -14,7 +14,8 @@ import id.ruangopini.utils.Helpers.toTitleCase
 
 class DetailPolicyAdapter(
     private val mContext: Context,
-    private val listPolicy: List<Policy>
+    private val listPolicy: List<Policy>,
+    private val policyListener: PolicyListener? = null
 ) : RecyclerView.Adapter<DetailPolicyAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -44,6 +45,10 @@ class DetailPolicyAdapter(
             tvPolicyYear.text = policy.year
 
             policy.documents.documents.let { populateDocument(it) }
+            policyListener?.let { listener ->
+                contentReference.setOnClickListener { listener.onPolicyCollect(policy) }
+            }
+
         }
     }
 
@@ -56,4 +61,8 @@ class DetailPolicyAdapter(
     }
 
     override fun getItemCount(): Int = listPolicy.size
+}
+
+interface PolicyListener {
+    fun onPolicyCollect(policy: Policy)
 }

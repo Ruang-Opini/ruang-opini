@@ -64,4 +64,13 @@ class ExampleUnitTest {
         }.trim()
         println(result)
     }
+
+    @Test
+    fun testCount() {
+        val list = mutableListOf<Int>()
+        (0 until 3).forEach { list.add(it) }
+        list.forEachIndexed { index, i ->
+            if (index == list.size - 1) println("$i, $list")
+        }
+    }
 }

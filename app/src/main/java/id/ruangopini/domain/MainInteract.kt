@@ -1,8 +1,6 @@
 package id.ruangopini.domain
 
-import id.ruangopini.data.model.Category
-import id.ruangopini.data.model.Policy
-import id.ruangopini.data.model.PolicyDocument
+import id.ruangopini.data.model.*
 import id.ruangopini.data.repo.IMainRepository
 import id.ruangopini.data.repo.State
 import kotlinx.coroutines.flow.Flow
@@ -23,4 +21,10 @@ class MainInteract(
         repository.getDocumentPolicy(url)
 
     override suspend fun getTrending(): Flow<State<List<String>>> = repository.getTrending()
+
+    override suspend fun getSentiment(trending: String): Flow<State<Respond>> =
+        repository.getSentiment(trending)
+
+    override suspend fun getBuzzer(trending: String): Flow<State<Buzzer>> =
+        repository.getBuzzer(trending)
 }

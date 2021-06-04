@@ -1,5 +1,6 @@
 package id.ruangopini.ui.base.reference
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,7 +14,8 @@ import id.ruangopini.ui.policy.detail.DetailPolicyActivity
 class ReferenceAdapter(
     private val context: Context,
     private val categories: List<PolicyCategory>,
-    private val itemType: Int
+    private val itemType: Int,
+    private val isNeedResult: Boolean? = false
 ) : RecyclerView.Adapter<ReferenceAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -31,15 +33,24 @@ class ReferenceAdapter(
         with(binding) {
             tvCategoryName.text = item.name
             contentCategory.setOnClickListener {
-                context.startActivity(Intent(context, DetailPolicyActivity::class.java)
-                    .apply {
-                        putExtra(DetailPolicyActivity.EXTRA_CATEGORY, item)
-                        putExtra(DetailPolicyActivity.EXTRA_TYPE, itemType)
-                    })
+                val intent = Intent(context, DetailPolicyActivity::class.java).apply {
+                    putExtra(DetailPolicyActivity.EXTRA_CATEGORY, item)
+                    putExtra(DetailPolicyActivity.EXTRA_TYPE, itemType)
+                }
+                if (isNeedResult == true) (context as Activity).startActivityForResult(
+                    intent,
+                    REQ_CODE
+                )
+                else context.startActivity(intent)
+
             }
         }
     }
 
     override fun getItemCount(): Int = categories.size
+
+    companion object {
+        const val REQ_CODE = 101
+    }
 
 }

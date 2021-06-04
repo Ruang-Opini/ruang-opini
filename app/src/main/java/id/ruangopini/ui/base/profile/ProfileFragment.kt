@@ -15,10 +15,12 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import id.ruangopini.R
 import id.ruangopini.databinding.FragmentProfileBinding
-import id.ruangopini.ui.base.dicussion.ContentDiscussionFragment
 import id.ruangopini.ui.editprofile.EditProfileActivity
+import id.ruangopini.ui.post.fragment.PostFragment
 import id.ruangopini.ui.settings.SettingsActivity
 import id.ruangopini.utils.DateFormat
 import id.ruangopini.utils.Helpers
@@ -121,13 +123,15 @@ class ProfileFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @ExperimentalCoroutinesApi
     private inner class SectionPagerAdapter(
         fa: FragmentActivity
     ) : FragmentStateAdapter(fa) {
+        val currentUserId = Firebase.auth.currentUser?.uid ?: ""
         override fun getItemCount(): Int = 2
         override fun createFragment(position: Int): Fragment =
             // TODO: 5/28/2021 change with post and comment fragment
-            ContentDiscussionFragment.newInstance(position.plus(1))
+            PostFragment.newInstance(PostFragment.Companion.GetPost.USER_ID, currentUserId)
     }
 
     companion object {

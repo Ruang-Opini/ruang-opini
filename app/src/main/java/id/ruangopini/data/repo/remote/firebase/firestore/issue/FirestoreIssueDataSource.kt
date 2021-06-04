@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface FirestoreIssueDataSource {
     fun findIssue(name: String): Flow<State<Issue>>
     fun createNewIssue(issue: Issue): Flow<State<String>>
+    fun getAllIssue(): Flow<State<List<Issue>>>
 }

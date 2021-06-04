@@ -1,6 +1,7 @@
 package id.ruangopini.ui.discussion.create
 
 import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,7 +46,8 @@ class CreateDiscussionViewModel(
                     }
                     is State.Failed -> {
                         DialogHelpers.hideLoadingDialog()
-                        Helpers.showToast(activity, it.message)
+                        Log.d("TAG", "createNewDiscussion: ${it.message}")
+                        createNewIssue(discussion, activity)
                     }
                 }
             } else createDiscussion(discussion, activity, true)
@@ -67,7 +69,7 @@ class CreateDiscussionViewModel(
                 }
                 is State.Failed -> {
                     DialogHelpers.hideLoadingDialog()
-                    Helpers.showToast(activity, it.message)
+                    Log.d("TAG", "createDiscussion: ${it.message}")
                 }
             }
         }

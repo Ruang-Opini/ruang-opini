@@ -19,6 +19,7 @@ object COLLECTION {
 object STORAGE {
     const val ROOT_AVA = "photos/ava/"
     const val ROOT_POST = "photos/post/"
+    const val ROOT_BANNER = "photos/banner/"
 }
 
 object DateFormat {
@@ -29,6 +30,7 @@ object DateFormat {
 object PATH {
     const val AVA = "AVA_"
     const val POST = "POST_"
+    const val BANNER = "BANNER_"
 }
 
 enum class LoginState {

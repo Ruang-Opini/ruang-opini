@@ -23,126 +23,160 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/ivBannerEdit"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="56dp"
-        android:elevation="5dp"
-        android:scaleType="centerCrop"
-        android:src="@color/primary_20"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-    <ImageView
-        android:id="@+id/ivAvaEdit"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/bg_circle"
-        android:backgroundTint="?attr/colorOnPrimary"
-        android:elevation="10dp"
-        android:padding="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivBannerEdit" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_camera"
-        app:backgroundTint="@color/primary_20"
-        app:elevation="12dp"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="@+id/ivAvaEdit"
-        app:layout_constraintEnd_toEndOf="@+id/ivAvaEdit" />
+            <ImageView
+                android:id="@+id/ivBanner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:elevation="0dp"
+                android:scaleType="centerCrop"
+                android:src="@color/primary_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_camera"
-        app:backgroundTint="@color/primary_20"
-        app:elevation="12dp"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBannerEdit"
-        app:layout_constraintEnd_toEndOf="@+id/ivBannerEdit" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnEditBanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_camera"
+                app:backgroundTint="@color/primary"
+                app:elevation="12dp"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="@+id/ivBanner"
+                app:layout_constraintEnd_toEndOf="@+id/ivBanner" />
 
-    <TextView
-        android:id="@+id/tvEditNama"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="32dp"
-        android:text="Nama"
-        app:layout_constraintTop_toBottomOf="@+id/ivBannerEdit" />
+            <ImageView
+                android:id="@+id/ivPicture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="125dp"
+                android:elevation="3dp"
+                android:layerType="software"
+                android:padding="8dp"
+                android:src="@drawable/dotted_circle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginTop="125dp" />
 
-    <EditText
-        android:id="@+id/editNama"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditNama" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:elevation="2dp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
+                app:layout_constraintEnd_toEndOf="@+id/ivPicture"
+                app:layout_constraintStart_toStartOf="@+id/ivPicture"
+                app:layout_constraintTop_toTopOf="@+id/ivPicture"
+                app:tint="@color/primary" />
 
-    <TextView
-        android:id="@+id/tvTitleUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="16dp"
-        android:text="Usernama"
-        app:layout_constraintTop_toBottomOf="@+id/editNama" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/bg_circle"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
+                app:layout_constraintEnd_toEndOf="@+id/ivPicture"
+                app:layout_constraintStart_toStartOf="@+id/ivPicture"
+                app:layout_constraintTop_toTopOf="@+id/ivPicture"
+                app:tint="@color/primary_20" />
 
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="4dp"
-        android:text="Sibejooo"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitleUsername" />
 
-    <TextView
-        android:id="@+id/tvEditBio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="16dp"
-        android:text="Nama"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+            <ImageView
+                android:id="@+id/ivBlackBackground"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:elevation="1dp"
+                android:src="@drawable/bg_circle"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
+                app:layout_constraintEnd_toEndOf="@+id/ivPicture"
+                app:layout_constraintStart_toStartOf="@+id/ivPicture"
+                app:layout_constraintTop_toTopOf="@+id/ivPicture"
+                app:tint="#66000000" />
 
-    <EditText
-        android:id="@+id/editBio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditBio" />
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/bg_circle"
+                android:backgroundTint="?attr/colorOnPrimary"
+                android:padding="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
+                app:layout_constraintEnd_toEndOf="@+id/ivPicture"
+                app:layout_constraintStart_toStartOf="@+id/ivPicture"
+                app:layout_constraintTop_toTopOf="@+id/ivPicture" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivPicture">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBio"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Bio" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnEditProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="165dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/primary"
-        android:enabled="false"
-        android:text="Masuk"
+        android:text="Simpan"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBio" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

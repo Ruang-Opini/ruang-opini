@@ -9,4 +9,5 @@ interface FirestoreUserDataSource {
     fun updatePhoto(path: String): Flow<State<Boolean>>
     fun getUserById(userId: String): Flow<State<User>>
     fun getUserByUsername(username: String): Flow<State<User>>
+    fun updateUser(user: User): Flow<State<Boolean>>
 }

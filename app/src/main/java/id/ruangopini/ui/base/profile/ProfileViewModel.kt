@@ -29,6 +29,9 @@ class ProfileViewModel(
     private val _photoUrl = MutableLiveData<Uri>()
     val photoUrl: LiveData<Uri> get() = _photoUrl
 
+    private val _headerUrl = MutableLiveData<Uri>()
+    val headerUrl: LiveData<Uri> get() = _headerUrl
+
     @ExperimentalCoroutinesApi
     fun getUserData() = viewModelScope.launch {
         val id = Firebase.auth.currentUser?.uid ?: ""
@@ -40,6 +43,7 @@ class ProfileViewModel(
                     it.data.let { data ->
                         _user.value = data
                         loadAva(data)
+                        loadBanner(data)
                     }
                 }
                 is State.Failed -> {
@@ -63,6 +67,25 @@ class ProfileViewModel(
                     }
                     is State.Failed -> {
                         Log.d("TAG", "loadAva: failed = ${it.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun loadBanner(user: User) = viewModelScope.launch {
+        user.headerUrl.let { photo ->
+            storageUserRepository.getImageUrl(
+                STORAGE.ROOT_BANNER.plus(user.userId).plus("/").plus(photo)
+            ).collect {
+                when (it) {
+                    is State.Loading -> {
+                    }
+                    is State.Success -> {
+                        it.data.let { data -> _headerUrl.value = data }
+                    }
+                    is State.Failed -> {
+                        Log.d("TAG", "loadBanner: failed = ${it.message}")
                     }
                 }
             }

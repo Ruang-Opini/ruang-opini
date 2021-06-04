@@ -27,6 +27,7 @@ import id.ruangopini.utils.Helpers
 import id.ruangopini.utils.Helpers.formatDate
 import id.ruangopini.utils.Helpers.getColorFromAttr
 import id.ruangopini.utils.Helpers.hideView
+import id.ruangopini.utils.Helpers.showView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -60,12 +61,19 @@ class ProfileFragment : Fragment() {
                 tvName.text = it.name
                 tvUsername.text = it.username
                 it.bio.let { bio ->
-                    if (bio != null) tvBio.text = bio
-                    else tvBio.hideView()
+                    if (bio != null) tvBio.apply {
+                        text = bio
+                        showView()
+                    } else tvBio.hideView()
                 }
                 tvJoinDate.text =
                     "Bergabung pada ".plus(it.joinedIn?.formatDate(DateFormat.PROFILE))
                 it.name?.let { name -> setupToolbar(name) }
+
+                btnEditProfile.setOnClickListener { _ ->
+                    startActivity(Intent(requireContext(), EditProfileActivity::class.java)
+                        .apply { putExtra(EditProfileActivity.EXTRA_USER, it) })
+                }
             })
             model.photoUrl.observe(viewLifecycleOwner, {
                 Log.d("TAG", "photoUrl: $it")
@@ -76,10 +84,11 @@ class ProfileFragment : Fragment() {
                     placeholder(R.drawable.ic_person)
                 } else setDefaultPhoto()
             })
-            // TODO: 5/28/2021 load img banner
-            btnEditProfile.setOnClickListener {
-                startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+
+            model.headerUrl.observe(viewLifecycleOwner) {
+                if (it != null) ivBanner.load(it) { crossfade(true) }
             }
+
         }
     }
 

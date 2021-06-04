@@ -9,4 +9,8 @@ interface FirestoreDiscussionDataSource {
 
     // TODO: 5/26/2021 get trending discussion
     fun createNewDiscussion(discussion: Discussion): Flow<State<Boolean>>
+    fun joinDiscussion(discussionId: String, userId: String): Flow<State<Boolean>>
+    fun leaveDiscussion(discussionId: String, userId: String): Flow<State<Boolean>>
+    fun getDiscussionById(discussionId: String): Flow<State<Discussion>>
+    fun getDiscussionByIssueName(issueName: String): Flow<State<List<Discussion>>>
 }

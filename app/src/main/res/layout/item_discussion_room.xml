@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentDiscussionRoom"
+    style="@style/ItemsTouchable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_rounded_rect_outline"
@@ -39,6 +41,7 @@
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/contentPolicy"
+            style="@style/ItemsTouchable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

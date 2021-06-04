@@ -1,6 +1,7 @@
 package id.ruangopini.ui.base.dicussion
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.google.android.material.chip.Chip
 import id.ruangopini.R
 import id.ruangopini.data.model.Discussion
 import id.ruangopini.databinding.ItemDiscussionRoomBinding
+import id.ruangopini.ui.discussion.detail.DetailDiscussionRoomActivity
 import id.ruangopini.utils.Helpers.getColorFromAttr
 import id.ruangopini.utils.Helpers.hideView
 
@@ -49,6 +51,15 @@ class DiscussionRoomAdapter(
                     chipStrokeWidth = 2f
                     chipStrokeColor = ContextCompat.getColorStateList(context, R.color.primary)
                 })
+            }
+            contentDiscussionRoom.setOnClickListener {
+                context.startActivity(Intent(context, DetailDiscussionRoomActivity::class.java)
+                    .apply {
+                        putExtra(
+                            DetailDiscussionRoomActivity.EXTRA_DISCUSSION,
+                            discussion
+                        )
+                    })
             }
         }
     }

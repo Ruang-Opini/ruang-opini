@@ -22,8 +22,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var skeleton: Skeleton
     private val model: HomeViewModel by viewModel()
-    private val concatAdapter = ConcatAdapter()
-
+    private var concatAdapter = ConcatAdapter()
+    private var header = HeaderAdapter("#OnTrendingTwitter")
+    private lateinit var trending: TrendingAdapter
+    private var headerTwo = HeaderAdapter("\nApa lagi yang populer?")
+    private lateinit var anotherPop: TrendingCategoryAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,35 +42,21 @@ class HomeFragment : Fragment() {
             .apply { initSkeleton(requireContext()) }
 
         model.getTrending()
-
+        trending = TrendingAdapter(requireContext())
+        anotherPop = TrendingCategoryAdapter(
+            requireContext(),
+            listOf("Korupsi", "Medis", "Transportasi", "BUMN")
+        )
+        concatAdapter = ConcatAdapter(header, trending, headerTwo, anotherPop)
+        updateAdapter()
 
         model.trending.observe(viewLifecycleOwner, {
             Log.d("TAG", "trending-twit: $it")
-            if (it.first() != "upstream request timeout") {
-                val header = HeaderAdapter("#OnTrendingTwitter")
-                val trending = TrendingAdapter(requireContext(), it)
-                concatAdapter.addAdapter(header)
-                concatAdapter.addAdapter(trending)
-                updateAdapter()
-            }
-
-
-            val headerTwo = HeaderAdapter("\nYang Trending Lainnya")
-            // TODO: 6/1/2021 get data from trending from category
-            val anotherPop = TrendingCategoryAdapter(
-                requireContext(), listOf(
-                    "Korupsi", "Medis", "Transportasi", "BUMN"
-                )
-            )
-            concatAdapter.addAdapter(headerTwo)
-            concatAdapter.addAdapter(anotherPop)
+            trending.addAll(it)
             updateAdapter()
-
         })
 
         model.loading.observe(viewLifecycleOwner, { populateLoading(it) })
-
-
     }
 
     private fun updateAdapter() {
@@ -79,7 +68,10 @@ class HomeFragment : Fragment() {
 
     private fun populateLoading(it: Boolean) {
         if (it) skeleton.showSkeleton()
-        else skeleton.showOriginal()
+        else {
+            skeleton.showOriginal()
+            updateAdapter()
+        }
     }
 
     companion object {

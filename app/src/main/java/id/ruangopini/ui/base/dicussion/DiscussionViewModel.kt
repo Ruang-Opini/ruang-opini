@@ -39,4 +39,21 @@ class DiscussionViewModel(
             }
         }
     }
+
+    @ExperimentalCoroutinesApi
+    fun getDiscussionByIssueName(issueName: String) = viewModelScope.launch {
+        repo.getDiscussionByIssueName(issueName).collect {
+            when (it) {
+                is State.Loading -> _isLoading.value = true
+                is State.Success -> it.data.let { data ->
+                    _isLoading.value = false
+                    _discussion.value = if (data.isNotEmpty()) data else listOf()
+                }
+                is State.Failed -> it.message.let { error ->
+                    _isLoading.value = false
+                    Log.d("TAG", "getLatestDiscussion: error = $error")
+                }
+            }
+        }
+    }
 }

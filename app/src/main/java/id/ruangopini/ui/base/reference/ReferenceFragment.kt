@@ -42,8 +42,9 @@ class ReferenceFragment : Fragment() {
     }
 
     private fun populateData(it: Category) {
-        val firstAdapter = PolicyAdapter(requireContext(), it.listType, 1)
-        val secondAdapter = PolicyAdapter(requireContext(), it.listCategory, 2)
+        val isNeedResult = arguments?.getBoolean(RESULT_ARG, false)
+        val firstAdapter = PolicyAdapter(requireContext(), it.listType, 1, isNeedResult)
+        val secondAdapter = PolicyAdapter(requireContext(), it.listCategory, 2, isNeedResult)
 
         val mAdapter = ConcatAdapter(
             HeaderAdapter("Jenis Kebijakan"), firstAdapter,
@@ -63,7 +64,13 @@ class ReferenceFragment : Fragment() {
 
     companion object {
 
+        private const val RESULT_ARG = "result_arg"
+
         @JvmStatic
-        fun newInstance() = ReferenceFragment()
+        fun newInstance(needResult: Boolean? = false) = ReferenceFragment().apply {
+            arguments = Bundle().apply {
+                putBoolean(RESULT_ARG, needResult ?: false)
+            }
+        }
     }
 }

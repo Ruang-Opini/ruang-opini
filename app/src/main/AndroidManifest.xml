@@ -18,6 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RuangOpini">
+        <activity android:name=".ui.post.detail.DetailPostActivity"></activity>
+        <activity android:name=".ui.base.reference.ReferenceActivity" />
+        <activity android:name=".ui.post.create.CreatePostActivity" />
+        <activity android:name=".ui.discussion.detail.DetailDiscussionRoomActivity" />
         <activity android:name=".ui.editprofile.EditProfileActivity" />
         <activity android:name=".ui.help.HelpActivity" />
         <activity android:name=".ui.aboutus.AboutUsActivity" />

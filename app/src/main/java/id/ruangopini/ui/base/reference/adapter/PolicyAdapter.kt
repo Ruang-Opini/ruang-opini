@@ -13,7 +13,7 @@ import id.ruangopini.ui.base.reference.ReferenceAdapter
 class PolicyAdapter(
     private val mContext: Context,
     private val categories: List<PolicyCategory>,
-    private val itemType: Int
+    private val itemType: Int, private val isNeedResult: Boolean? = false
 ) : RecyclerView.Adapter<PolicyAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -27,7 +27,7 @@ class PolicyAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         binding.rvGridList.apply {
             itemAnimator = DefaultItemAnimator()
-            adapter = ReferenceAdapter(mContext, categories, itemType)
+            adapter = ReferenceAdapter(mContext, categories, itemType, isNeedResult)
         }
     }
 

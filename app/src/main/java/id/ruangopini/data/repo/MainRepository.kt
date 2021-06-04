@@ -1,8 +1,6 @@
 package id.ruangopini.data.repo
 
-import id.ruangopini.data.model.Category
-import id.ruangopini.data.model.Policy
-import id.ruangopini.data.model.PolicyDocument
+import id.ruangopini.data.model.*
 import kotlinx.coroutines.flow.Flow
 
 class MainRepository(
@@ -22,4 +20,10 @@ class MainRepository(
 
     override suspend fun getTrending(): Flow<State<List<String>>> =
         remoteDataSource.getTrending()
+
+    override suspend fun getSentiment(trending: String): Flow<State<Respond>> =
+        remoteDataSource.getSentiment(trending)
+
+    override suspend fun getBuzzer(trending: String): Flow<State<Buzzer>> =
+        remoteDataSource.getBuzzer(trending)
 }

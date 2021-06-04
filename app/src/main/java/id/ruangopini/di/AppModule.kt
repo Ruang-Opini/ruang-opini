@@ -22,6 +22,7 @@ import id.ruangopini.ui.base.profile.ProfileViewModel
 import id.ruangopini.ui.base.reference.ReferenceViewModel
 import id.ruangopini.ui.discussion.create.CreateDiscussionViewModel
 import id.ruangopini.ui.discussion.detail.DetailDiscussionViewModel
+import id.ruangopini.ui.editprofile.EditProfileViewModel
 import id.ruangopini.ui.login.LoginViewModel
 import id.ruangopini.ui.policy.detail.DetailPolicyViewModel
 import id.ruangopini.ui.policy.trending.DetailTrendingPolicyViewModel
@@ -117,4 +118,5 @@ val viewModelModule = module {
     viewModel { DetailPostViewModel(get(), get()) }
     viewModel { DetailDiscussionViewModel(get()) }
     viewModel { DetailTrendingPolicyViewModel(get()) }
+    viewModel { EditProfileViewModel(get(), get()) }
 }

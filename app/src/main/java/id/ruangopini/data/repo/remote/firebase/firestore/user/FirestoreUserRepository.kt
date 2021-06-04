@@ -1,5 +1,6 @@
 package id.ruangopini.data.repo.remote.firebase.firestore.user
 
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -64,6 +65,23 @@ class FirestoreUserRepository : FirestoreUserDataSource {
                 snapshot.result?.toObjects(User::class.java)?.first() ?: User()
             )
         )
+    }.catch {
+        emit(State.failed(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
+    override fun updateUser(user: User) = flow<State<Boolean>> {
+        emit(State.loading())
+        val snapshot = instance.document(user.userId ?: "").update(
+            mapOf(
+                "name" to user.name,
+                "bio" to user.bio,
+                "photoUrl" to user.photoUrl,
+                "headerUrl" to user.headerUrl,
+                "updatedAt" to Timestamp.now(),
+            )
+        )
+        snapshot.await()
+        if (snapshot.isSuccessful) emit(State.success(true))
     }.catch {
         emit(State.failed(it.message ?: ""))
     }.flowOn(Dispatchers.IO)

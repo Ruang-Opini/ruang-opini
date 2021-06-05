@@ -36,6 +36,12 @@ class ReferenceFragment : Fragment() {
         skeleton = binding.rvReference
             .applySkeleton(R.layout.item_policy_category, 20)
             .apply { initSkeleton(requireContext()) }
+        binding.swipeRefresh.apply {
+            setOnRefreshListener {
+                model.getAllPolicyCategory()
+                isRefreshing = false
+            }
+        }
         model.getAllPolicyCategory()
         model.policyCategory.observe(viewLifecycleOwner, { populateData(it) })
         model.isLoading.observe(viewLifecycleOwner, { populateLoading(it) })

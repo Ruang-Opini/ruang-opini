@@ -38,18 +38,11 @@ class DetailTrendingPolicyActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         intent.extras?.getParcelable<Trend>(EXTRA_TRENDING)?.let {
-            policyName = it.name
-            model.getDiscussionByIssueName(it.name)
-            supportActionBar?.apply {
-                title = it.name
-                setDisplayHomeAsUpEnabled(true)
+            binding.contentDetail.swipeRefresh.apply {
+                getData(it)
+                isRefreshing = false
             }
-            binding.contentDetail.tvPolicyName.text = it.name
-            populateBuzzer(it.buzzer)
-            populateRespond(it.respond)
-
-            if (it.buzzer.buzzer == 0) trendingModel.getBuzzer(it.name)
-            if (it.respond.positive == 0) trendingModel.getSentiment(it.name)
+            getData(it)
         }
 
         model.discussion.observe(this, {
@@ -74,7 +67,21 @@ class DetailTrendingPolicyActivity : AppCompatActivity() {
                 )
             }
         }
-        // TODO: 6/1/2021 get data from
+    }
+
+    private fun getData(it: Trend) {
+        policyName = it.name
+        model.getDiscussionByIssueName(it.name)
+        supportActionBar?.apply {
+            title = it.name
+            setDisplayHomeAsUpEnabled(true)
+        }
+        binding.contentDetail.tvPolicyName.text = it.name
+        populateBuzzer(it.buzzer)
+        populateRespond(it.respond)
+
+        if (it.buzzer.buzzer == 0) trendingModel.getBuzzer(it.name)
+        if (it.respond.positive == 0) trendingModel.getSentiment(it.name)
     }
 
     private fun populateRespond(respond: Respond) = with(binding.contentDetail) {

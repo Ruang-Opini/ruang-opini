@@ -7,7 +7,6 @@ import id.ruangopini.data.repo.remote.retrofit.SentimentService
 import id.ruangopini.data.repo.remote.retrofit.TrendingService
 import id.ruangopini.data.repo.remote.retrofit.response.toListPolicy
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -18,18 +17,17 @@ class RemoteDataSource(
     private val trendingService: TrendingService,
     private val buzzerService: BuzzerService
 ) {
-    suspend fun getAllPolicyCategory(): Flow<State<Category>> =
-        flow {
-            emit(State.loading())
-            try {
-                val response = apiService.getAllPolicyCategory()
-                response.category.let {
-                    val result = if (
-                        it?.categoryOfPolicy?.isNotEmpty() == true && it.typeOfPolicy?.isNotEmpty() == true
-                    ) Category(
-                        it.typeOfPolicy.toPolicyCategory(), it.categoryOfPolicy.toPolicyCategory()
-                    ) else CategoryResponse().let { response ->
-                        Category(
+    suspend fun getAllPolicyCategory() = flow<State<Category>> {
+        emit(State.loading())
+        try {
+            val response = apiService.getAllPolicyCategory()
+            response.category.let {
+                val result = if (
+                    it?.categoryOfPolicy?.isNotEmpty() == true && it.typeOfPolicy?.isNotEmpty() == true
+                ) Category(
+                    it.typeOfPolicy.toPolicyCategory(), it.categoryOfPolicy.toPolicyCategory()
+                ) else CategoryResponse().let { response ->
+                    Category(
                             response.categoryOfPolicy?.toPolicyCategory() ?: listOf(),
                             response.categoryOfPolicy?.toPolicyCategory() ?: listOf()
                         )
@@ -41,7 +39,7 @@ class RemoteDataSource(
             }
         }.flowOn(Dispatchers.IO)
 
-    suspend fun getPolicyByType(url: String): Flow<State<List<Policy>>> = flow {
+    suspend fun getPolicyByType(url: String) = flow<State<List<Policy>>> {
         emit(State.loading())
         try {
             val response = apiService.getPolicyByType(url)
@@ -54,7 +52,7 @@ class RemoteDataSource(
         }
     }.flowOn(Dispatchers.IO)
 
-    suspend fun getPolicyByCategory(url: String): Flow<State<List<Policy>>> = flow {
+    suspend fun getPolicyByCategory(url: String) = flow<State<List<Policy>>> {
         emit(State.loading())
         try {
             val response = apiService.getPolicyByCategory(url)
@@ -67,7 +65,7 @@ class RemoteDataSource(
         }
     }.flowOn(Dispatchers.IO)
 
-    suspend fun getDocumentPolicy(url: String): Flow<State<PolicyDocument>> = flow {
+    suspend fun getDocumentPolicy(url: String) = flow<State<PolicyDocument>> {
         emit(State.loading())
         try {
             val response = apiService.getDocumentPolicy(url)

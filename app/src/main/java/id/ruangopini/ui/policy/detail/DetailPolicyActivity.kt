@@ -33,13 +33,13 @@ class DetailPolicyActivity : AppCompatActivity(), PolicyListener {
             .apply { initSkeleton(this@DetailPolicyActivity) }
 
         intent.extras?.getParcelable<PolicyCategory>(EXTRA_CATEGORY)?.let {
-            supportActionBar?.apply {
-                title = it.name
-                setDisplayHomeAsUpEnabled(true)
+            binding.swipeRefresh.apply {
+                setOnRefreshListener {
+                    getData(it)
+                    isRefreshing = false
+                }
             }
-            val type = intent.extras?.getInt(EXTRA_TYPE, 1)
-            if (type == 1) model.getPolicyByType(it.url.getUrlPath())
-            else model.getPolicyByCategory(it.url.getUrlPath())
+            getData(it)
         }
 
         model.listPolicy.observe(this, {
@@ -54,6 +54,16 @@ class DetailPolicyActivity : AppCompatActivity(), PolicyListener {
 
         model.isLoading.observe(this, { populateLoading(it) })
 
+    }
+
+    private fun getData(it: PolicyCategory) {
+        supportActionBar?.apply {
+            title = it.name
+            setDisplayHomeAsUpEnabled(true)
+        }
+        val type = intent.extras?.getInt(EXTRA_TYPE, 1)
+        if (type == 1) model.getPolicyByType(it.url.getUrlPath())
+        else model.getPolicyByCategory(it.url.getUrlPath())
     }
 
     private fun populateLoading(it: Boolean) {

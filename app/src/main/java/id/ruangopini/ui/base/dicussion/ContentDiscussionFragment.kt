@@ -35,6 +35,15 @@ class ContentDiscussionFragment : Fragment() {
             .applySkeleton(R.layout.item_discussion_room, 20)
             .apply { initSkeleton(requireContext()) }
         arguments?.getInt(POS_ARG, 1).let {
+            binding.swipeRefresh.apply {
+                setOnRefreshListener {
+                    if (it == 1) {
+                        // TODO: 5/26/2021 change to getTrendingDiscussion
+                        model.getLatestDiscussion(requireContext())
+                    } else model.getLatestDiscussion(requireContext())
+                }
+                isRefreshing = false
+            }
             if (it == 1) {
                 // TODO: 5/26/2021 change to getTrendingDiscussion
                 model.getLatestDiscussion(requireContext())

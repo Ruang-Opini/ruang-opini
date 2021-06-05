@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                     ProfileFragment.newInstance()
                 )
             )
+            isUserInputEnabled = false
             registerOnPageChangeCallback(onPageChange)
         }
 

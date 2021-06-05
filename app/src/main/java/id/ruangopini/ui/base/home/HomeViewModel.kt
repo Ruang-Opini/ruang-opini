@@ -25,10 +25,16 @@ class HomeViewModel(
     private val _trending = MutableLiveData<List<Trend>>()
     val trending: LiveData<List<Trend>> get() = _trending
 
+    private fun clearTrending() {
+        currentTrend.clear()
+        _trending.value = currentTrend
+    }
+
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
 
     fun getTrending() = viewModelScope.launch {
+        clearTrending()
         useCase.getTrending().collect {
             when (it) {
                 is State.Loading -> _loading.value = true

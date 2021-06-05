@@ -1,243 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contentScroll"
+    android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentScroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView4"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/tvPolicyName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="#TangkapMadamBansos"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.progressindicator.CircularProgressIndicator
-                    android:id="@+id/circularProgressIndicator"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:progress="60"
-                    app:indicatorSize="130dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvPercentNegative"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toStartOf="@+id/titleRespond"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPolicyName"
-                    app:trackColor="@color/primary_20"
-                    app:trackCornerRadius="8dp"
-                    app:trackThickness="40dp" />
-
-                <TextView
-                    android:id="@+id/titleRespond"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Tanggapan"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/circularProgressIndicator"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPolicyName" />
-
-                <View
-                    android:id="@+id/positiveView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@drawable/bg_circle"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvTitlePositive"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="@+id/titleRespond"
-                    app:layout_constraintTop_toTopOf="@+id/tvTitlePositive" />
-
-                <TextView
-                    android:id="@+id/tvTitlePositive"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Positif"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/positiveView"
-                    app:layout_constraintTop_toBottomOf="@+id/titleRespond" />
-
-                <TextView
-                    android:id="@+id/tvPrecentPositive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="60%"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/tvTitlePositive"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitlePositive" />
-
-                <TextView
-                    android:id="@+id/tvAmountPositive"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="(3000)"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvPrecentPositive"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tvPrecentPositive"
-                    app:layout_constraintTop_toTopOf="@+id/tvPrecentPositive" />
-
-                <View
-                    android:id="@+id/negativeView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@drawable/bg_circle"
-                    android:backgroundTint="@color/primary_20"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvTitleNegative"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="@+id/titleRespond"
-                    app:layout_constraintTop_toTopOf="@+id/tvTitleNegative" />
-
-                <TextView
-                    android:id="@+id/tvTitleNegative"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Negatif"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/positiveView"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPrecentPositive" />
-
-                <TextView
-                    android:id="@+id/tvPercentNegative"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="40%"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/tvTitleNegative"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitleNegative" />
-
-                <TextView
-                    android:id="@+id/tvAmountNegative"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="(2000)"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvPercentNegative"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tvPrecentPositive"
-                    app:layout_constraintTop_toTopOf="@+id/tvPercentNegative" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/buzzerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_rounded_rect_outline"
-                    android:padding="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator">
-
-                    <ImageView
-                        android:id="@+id/ivBuzzer"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/buzzerPercentage"
-                        app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toEndOf="@+id/buzzerPercentage"
-                        app:layout_constraintStart_toStartOf="@+id/buzzerPercentage"
-                        app:layout_constraintTop_toTopOf="@+id/buzzerPercentage"
-                        app:layout_constraintVertical_bias="1.0"
-                        app:srcCompat="@drawable/ic_buzzer" />
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/textView19"
+                        android:id="@+id/tvPolicyName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Tingkat Buzzer"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textStyle="bold"
+                        android:text="#TangkapMadamBansos"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/ivBuzzer"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/circularProgressIndicator"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:progress="60"
+                        app:indicatorSize="130dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPercentNegative"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toStartOf="@+id/titleRespond"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPolicyName"
+                        app:trackColor="@color/primary_20"
+                        app:trackCornerRadius="8dp"
+                        app:trackThickness="40dp" />
+
                     <TextView
-                        android:id="@+id/tvBuzzerInfo"
+                        android:id="@+id/titleRespond"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Tanggapan"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/circularProgressIndicator"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPolicyName" />
+
+                    <View
+                        android:id="@+id/positiveView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@drawable/bg_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvTitlePositive"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintStart_toStartOf="@+id/titleRespond"
+                        app:layout_constraintTop_toTopOf="@+id/tvTitlePositive" />
+
+                    <TextView
+                        android:id="@+id/tvTitlePositive"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
-                        android:text="Trending ini aman dari buzzer"
+                        android:layout_marginTop="16dp"
+                        android:text="Positif"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/ivBuzzer"
-                        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                        app:layout_constraintStart_toEndOf="@+id/positiveView"
+                        app:layout_constraintTop_toBottomOf="@+id/titleRespond" />
 
                     <TextView
-                        android:id="@+id/buzzerPercentage"
+                        android:id="@+id/tvPrecentPositive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="60%"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tvTitlePositive"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitlePositive" />
+
+                    <TextView
+                        android:id="@+id/tvAmountPositive"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="(3000)"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPrecentPositive"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvPrecentPositive"
+                        app:layout_constraintTop_toTopOf="@+id/tvPrecentPositive" />
+
+                    <View
+                        android:id="@+id/negativeView"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="10%"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvBuzzerInfo"
+                        android:background="@drawable/bg_circle"
+                        android:backgroundTint="@color/primary_20"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvTitleNegative"
                         app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintStart_toStartOf="@+id/buzzerView"
-                        app:layout_constraintTop_toTopOf="@+id/textView19" />
+                        app:layout_constraintStart_toStartOf="@+id/titleRespond"
+                        app:layout_constraintTop_toTopOf="@+id/tvTitleNegative" />
+
+                    <TextView
+                        android:id="@+id/tvTitleNegative"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Negatif"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/positiveView"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPrecentPositive" />
+
+                    <TextView
+                        android:id="@+id/tvPercentNegative"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="40%"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/tvTitleNegative"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitleNegative" />
+
+                    <TextView
+                        android:id="@+id/tvAmountNegative"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="(2000)"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPercentNegative"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvPrecentPositive"
+                        app:layout_constraintTop_toTopOf="@+id/tvPercentNegative" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/buzzerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_rounded_rect_outline"
+                        android:padding="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/circularProgressIndicator">
+
+                        <ImageView
+                            android:id="@+id/ivBuzzer"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/buzzerPercentage"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintEnd_toEndOf="@+id/buzzerPercentage"
+                            app:layout_constraintStart_toStartOf="@+id/buzzerPercentage"
+                            app:layout_constraintTop_toTopOf="@+id/buzzerPercentage"
+                            app:layout_constraintVertical_bias="1.0"
+                            app:srcCompat="@drawable/ic_buzzer" />
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Tingkat Buzzer"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivBuzzer"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvBuzzerInfo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:text="Trending ini aman dari buzzer"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/ivBuzzer"
+                            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                        <TextView
+                            android:id="@+id/buzzerPercentage"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:padding="4dp"
+                            android:text="10%"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvBuzzerInfo"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintStart_toStartOf="@+id/buzzerView"
+                            app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDiscussionRoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:padding="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView4"
+                tools:listitem="@layout/item_discussion_room" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDiscussionRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="false"
-            android:padding="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4"
-            tools:listitem="@layout/item_discussion_room" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

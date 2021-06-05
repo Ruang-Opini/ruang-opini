@@ -14,8 +14,10 @@ import id.ruangopini.R
 import id.ruangopini.databinding.FragmentHomeBinding
 import id.ruangopini.ui.base.reference.adapter.HeaderAdapter
 import id.ruangopini.utils.Helpers.initSkeleton
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@ExperimentalCoroutinesApi
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
@@ -40,6 +42,11 @@ class HomeFragment : Fragment() {
         skeleton = binding.rvHome
             .applySkeleton(R.layout.item_trending, 20)
             .apply { initSkeleton(requireContext()) }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            model.getTrending()
+            binding.swipeRefresh.isRefreshing = false
+        }
 
         model.getTrending()
         trending = TrendingAdapter(requireContext())

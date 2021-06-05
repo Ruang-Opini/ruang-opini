@@ -47,7 +47,7 @@ object DataHelpers {
     fun getTextBuzzer(percentage: Int) = when (percentage) {
         in 0..33 -> "Trending ini aman dari Buzzer"
         in 34..66 -> "Trending ini rentan dari Buzzer"
-        in 67..100 -> "Trending ini terindikasi dibuat oleh Buzzer"
+        in 67..100 -> "Trending ini dipadati oleh Buzzer"
         else -> "Trending ini aman dari Buzzer"
     }
 

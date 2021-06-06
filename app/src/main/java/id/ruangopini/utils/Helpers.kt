@@ -5,18 +5,24 @@ import android.content.Context
 import android.content.res.Configuration
 import android.net.Uri
 import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.faltenreich.skeletonlayout.Skeleton
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.marlonlom.utilities.timeago.TimeAgo
+import com.github.marlonlom.utilities.timeago.TimeAgoMessages
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Timestamp
 import id.ruangopini.R
@@ -143,5 +149,29 @@ object Helpers {
 
     fun Int.reSize(percentage: Int) = (this.toFloat() * (percentage.toFloat().div(100.0))).toInt()
 
+    fun TextView.addImage(atText: String, @DrawableRes imgSrc: Int) {
+        val imgHeight = resources.getDimensionPixelOffset(R.dimen.dp_20)
+        val imgWidth = resources.getDimensionPixelOffset(
+            if (atText == "[icon-join]") R.dimen.dp_60 else R.dimen.dp_20
+        )
+        val ssb = SpannableStringBuilder(this.text)
+
+        val drawable = ContextCompat.getDrawable(this.context, imgSrc) ?: return
+        drawable.mutate()
+        drawable.setBounds(0, 0, imgWidth, imgHeight)
+        val start = text.indexOf(atText)
+        ssb.setSpan(
+            VerticalImageSpan(drawable),
+            start,
+            start + atText.length,
+            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        )
+        this.setText(ssb, TextView.BufferType.SPANNABLE)
+    }
+
+    fun Timestamp.toTimeAgo(): String {
+        val messages: TimeAgoMessages = TimeAgoMessages.Builder().withLocale(Locale("id")).build()
+        return TimeAgo.using(this.toDate().time, messages)
+    }
 
 }

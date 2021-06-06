@@ -29,10 +29,10 @@ class SettingsActivity : AppCompatActivity() {
             adapter = SettingsAdapter(
                 this@SettingsActivity,
                 listOf(
-                    // TODO: 5/28/2021 change with exact target
                     ItemSetting("Bantuan", HelpActivity::class.java),
                     ItemSetting("Ubah Password", ChangePasswordActivity::class.java),
                     ItemSetting("Tentang Kami", AboutUsActivity::class.java),
+                    ItemSetting("Berikan Upan Balik"),
                     ItemSetting("Keluar"),
                 )
             )

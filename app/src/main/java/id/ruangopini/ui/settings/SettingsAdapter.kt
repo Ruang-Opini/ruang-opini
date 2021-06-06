@@ -3,6 +3,7 @@ package id.ruangopini.ui.settings
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,15 +43,19 @@ class SettingsAdapter(
                         context.startActivity(Intent(context, target))
                 }
                 if (setting.target == null) {
-                    DialogHelpers.showLoadingDialog(context as Activity, "Keluar...")
-                    GlobalScope.launch {
-                        delay(2000)
-                        AuthHelpers.signOut(context)
-                        context.let {
-                            it.startActivity(Intent(it, LoginActivity::class.java))
-                            it.finishAffinity()
+                    if (setting.name == "Keluar") {
+                        DialogHelpers.showLoadingDialog(context as Activity, "Keluar...")
+                        GlobalScope.launch {
+                            delay(2000)
+                            AuthHelpers.signOut(context)
+                            context.let {
+                                it.startActivity(Intent(it, LoginActivity::class.java))
+                                it.finishAffinity()
+                            }
                         }
-                    }
+                    } else context.startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/ePQ8SSSgmn8e9YL3A"))
+                    )
                 }
             }
 

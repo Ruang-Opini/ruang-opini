@@ -17,7 +17,6 @@
             android:id="@+id/tvTrendingCategory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Korupsi"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -14,7 +14,6 @@
         android:paddingTop="12dp"
         android:paddingEnd="16dp"
         android:paddingBottom="12dp"
-        android:text="Bantuan"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/text_subtitle_size"
         app:layout_constraintBottom_toBottomOf="parent"

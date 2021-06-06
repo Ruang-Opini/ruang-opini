@@ -62,7 +62,7 @@ class TrendingAdapter(
                 max = 100
             }
 
-            tvPercentNegative.text = buildString { append(percentNegative).append("% Negitf") }
+            tvPercentNegative.text = buildString { append(percentNegative).append("% Negatif") }
             tvPrecentPositive.text = buildString { append(percentPositive).append("% Positif") }
 
             val colorBuzzer = DataHelpers.getColorBuzzer(percentBuzzer)

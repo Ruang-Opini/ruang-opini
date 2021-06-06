@@ -41,8 +41,8 @@ class ContentDiscussionFragment : Fragment() {
                         // TODO: 5/26/2021 change to getTrendingDiscussion
                         model.getLatestDiscussion(requireContext())
                     } else model.getLatestDiscussion(requireContext())
+                    isRefreshing = false
                 }
-                isRefreshing = false
             }
             if (it == 1) {
                 // TODO: 5/26/2021 change to getTrendingDiscussion

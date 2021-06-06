@@ -20,7 +20,6 @@
             android:id="@+id/tvDiscussionRoomName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Nama Ruang Diskusi"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +32,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mollis nec amet, nibh egestas tristique. Lorem blandit metus adipiscing risus. Libero semper in purus, lacus turpis ut velit scelerisque sem. Gravida hac pharetra rhoncus, tortor malesuada non viverra. "
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +59,6 @@
                 android:id="@+id/tvPolicyName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama Kebijakan"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold" />
 
@@ -104,7 +101,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="3500"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -146,7 +142,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="120"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toEndOf="@+id/cardView2"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />

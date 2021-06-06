@@ -39,8 +39,10 @@ class DetailTrendingPolicyActivity : AppCompatActivity() {
 
         intent.extras?.getParcelable<Trend>(EXTRA_TRENDING)?.let {
             binding.contentDetail.swipeRefresh.apply {
-                getData(it)
-                isRefreshing = false
+                setOnRefreshListener {
+                    getData(it)
+                    isRefreshing = false
+                }
             }
             getData(it)
         }

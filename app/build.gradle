@@ -124,4 +124,7 @@ dependencies {
 
     // photo view
     implementation 'com.github.stfalcon:stfalcon-imageviewer:1.0.1'
+
+    //time ago library
+    implementation 'com.github.marlonlom:timeago:4.0.3'
 }

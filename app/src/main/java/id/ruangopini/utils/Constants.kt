@@ -10,6 +10,7 @@ object COLLECTION {
     const val ISSUE = "issue"
     const val POST = "post"
     const val COMMENT = "comment"
+    const val HELP = "help"
 }
 
 /**

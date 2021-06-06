@@ -13,8 +13,7 @@ import id.ruangopini.data.model.Comment
 import id.ruangopini.data.repo.remote.firebase.firestore.user.FirestoreUserHelpers
 import id.ruangopini.data.repo.remote.firebase.storage.StorageUserHelpers
 import id.ruangopini.databinding.ItemCommentBinding
-import id.ruangopini.utils.DateFormat
-import id.ruangopini.utils.Helpers.formatDate
+import id.ruangopini.utils.Helpers.toTimeAgo
 import id.ruangopini.utils.STORAGE
 
 class CommentAdapter(
@@ -60,13 +59,8 @@ class CommentAdapter(
                     }
                 }
             }
-            ivAvatar.load("https://avatars.githubusercontent.com/u/32610660?v=4") {
-                crossfade(true)
-                transformations(CircleCropTransformation())
-            }
 
-
-            tvTime.text = comment.createdAt?.formatDate(DateFormat.POST)
+            tvTime.text = comment.createdAt?.toTimeAgo()
             tvComment.text = comment.comment
         }
     }

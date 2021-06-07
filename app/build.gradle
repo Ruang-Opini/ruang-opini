@@ -5,6 +5,12 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+ext.majorVersion = 0
+ext.minorVersion = 3
+ext.patchVersion = 4
+ext.preRelease = "beta"
+ext.minSdkVersion = 21
+
 android {
     signingConfigs {
         release {
@@ -25,10 +31,10 @@ android {
 
     defaultConfig {
         applicationId "id.ruangopini"
-        minSdkVersion 21
+        minSdkVersion project.ext.minSdkVersion
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode generateVersionCode()
+        versionName generateVersionName()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
@@ -52,6 +58,16 @@ android {
     buildFeatures {
         viewBinding true
     }
+}
+
+private Integer generateVersionCode() {
+    return ext.minSdkVersion * 10000000 + ext.majorVersion * 10000 + ext.minorVersion * 100 + ext.patchVersion
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.majorVersion}.${ext.minorVersion}.${ext.patchVersion}"
+    if (ext.preRelease != null && !ext.preRelease.isEmpty()) versionName = versionName + "-" + ext.preRelease
+    return versionName
 }
 
 dependencies {

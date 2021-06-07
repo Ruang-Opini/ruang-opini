@@ -19,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import id.ruangopini.R
 import id.ruangopini.databinding.FragmentProfileBinding
+import id.ruangopini.ui.comment.CommentFragment
 import id.ruangopini.ui.editprofile.EditProfileActivity
 import id.ruangopini.ui.post.fragment.PostFragment
 import id.ruangopini.ui.settings.SettingsActivity
@@ -137,10 +138,14 @@ class ProfileFragment : Fragment() {
         fa: FragmentActivity
     ) : FragmentStateAdapter(fa) {
         val currentUserId = Firebase.auth.currentUser?.uid ?: ""
+        val fragments = listOf(
+            PostFragment.newInstance(PostFragment.Companion.GetPost.USER_ID, currentUserId),
+            CommentFragment.newInstance()
+        )
+
         override fun getItemCount(): Int = 2
-        override fun createFragment(position: Int): Fragment =
-            // TODO: 5/28/2021 change with post and comment fragment
-            PostFragment.newInstance(PostFragment.Companion.GetPost.USER_ID, currentUserId)
+        override fun createFragment(position: Int): Fragment = fragments[position]
+
     }
 
     companion object {

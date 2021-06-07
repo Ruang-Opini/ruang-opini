@@ -21,6 +21,7 @@ import id.ruangopini.ui.base.dicussion.DiscussionViewModel
 import id.ruangopini.ui.base.home.HomeViewModel
 import id.ruangopini.ui.base.profile.ProfileViewModel
 import id.ruangopini.ui.base.reference.ReferenceViewModel
+import id.ruangopini.ui.comment.CommentViewModel
 import id.ruangopini.ui.discussion.create.CreateDiscussionViewModel
 import id.ruangopini.ui.discussion.detail.DetailDiscussionViewModel
 import id.ruangopini.ui.editprofile.EditProfileViewModel
@@ -123,4 +124,5 @@ val viewModelModule = module {
     viewModel { DetailTrendingPolicyViewModel(get()) }
     viewModel { EditProfileViewModel(get(), get()) }
     viewModel { HelpViewModel(get()) }
+    viewModel { CommentViewModel(get()) }
 }

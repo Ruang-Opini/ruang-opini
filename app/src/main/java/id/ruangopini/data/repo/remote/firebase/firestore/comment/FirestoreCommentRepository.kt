@@ -39,4 +39,16 @@ class FirestoreCommentRepository : FirestoreCommentDataSource {
     }.catch {
         emit(State.failed(it.message ?: ""))
     }.flowOn(Dispatchers.IO)
+
+    override fun getCommentByUserId(userId: String) = callbackFlow<State<List<Comment>>> {
+        trySend(State.loading()).isSuccess
+        instance.whereEqualTo("userId", userId).addSnapshotListener { value, error ->
+            if (error != null) trySend(State.failed(error.message ?: "")).isSuccess
+            if (value != null && !value.isEmpty) trySend(State.success(value.toObjects(Comment::class.java))).isSuccess
+            else trySend(State.success(emptyList())).isSuccess
+        }
+        awaitClose()
+    }.catch {
+        emit(State.failed(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
 }

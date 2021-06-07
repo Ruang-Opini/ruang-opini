@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface FirestoreCommentDataSource {
     fun createComment(comment: Comment): Flow<State<Boolean>>
     fun loadComment(postId: String): Flow<State<List<Comment>>>
+    fun getCommentByUserId(userId: String): Flow<State<List<Comment>>>
 }

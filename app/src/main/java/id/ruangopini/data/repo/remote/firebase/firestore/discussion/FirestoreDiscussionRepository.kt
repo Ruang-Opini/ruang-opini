@@ -117,6 +117,4 @@ class FirestoreDiscussionRepository : FirestoreDiscussionDataSource {
         }.catch {
             emit(State.failed(it.message ?: ""))
         }.flowOn(Dispatchers.IO)
-
-    // TODO: 5/26/2021 get trending discussion
 }

@@ -23,6 +23,7 @@ class CommentAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     private lateinit var binding: ItemCommentBinding
+    private var isTextExpanded: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -61,7 +62,18 @@ class CommentAdapter(
             }
 
             tvTime.text = comment.createdAt?.toTimeAgo()
-            tvComment.text = comment.comment
+            tvComment.apply {
+                text = comment.comment
+                setOnClickListener {
+                    isTextExpanded = if (isTextExpanded) {
+                        this.maxLines = 2
+                        false
+                    } else {
+                        this.maxLines = Integer.MAX_VALUE
+                        true
+                    }
+                }
+            }
         }
     }
 

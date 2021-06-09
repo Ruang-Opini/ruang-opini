@@ -32,6 +32,7 @@ class PostFragment : Fragment(), VoteListener {
             val id = arguments?.getString(ID_ARG, "") ?: ""
             when (get) {
                 GetPost.USER_ID -> model.getPostByUserId(id)
+                GetPost.DISCUSSION_POPULAR -> model.getPopularPostInDiscussion(id)
                 GetPost.DISCUSSION_ID_NEW -> model.getPostByDiscussionLatest(id)
             }
         }
@@ -46,7 +47,7 @@ class PostFragment : Fragment(), VoteListener {
     companion object {
         @Parcelize
         enum class GetPost : Parcelable {
-            USER_ID, DISCUSSION_ID_NEW
+            USER_ID, DISCUSSION_ID_NEW, DISCUSSION_POPULAR
         }
 
         private const val POST_ARG = "post_arg"

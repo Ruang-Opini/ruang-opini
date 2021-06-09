@@ -1,6 +1,7 @@
 package id.ruangopini.data.repo.remote.firebase.firestore.post
 
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import id.ruangopini.data.model.Post
@@ -31,11 +32,13 @@ class FirestorePostRepository : FirestorePostDataSource {
 
     override fun getPostByDiscussionId(discussionId: String) = callbackFlow<State<List<Post>>> {
         trySend(State.loading()).isSuccess
-        instance.whereEqualTo("discussionId", discussionId).addSnapshotListener { value, error ->
-            if (error != null) trySend(State.failed(error.message ?: "")).isSuccess
-            if (value != null && !value.isEmpty) trySend(State.success(value.toObjects(Post::class.java))).isSuccess
-            else trySend(State.success(emptyList())).isSuccess
-        }
+        instance.whereEqualTo("discussionId", discussionId)
+            .orderBy("createdAt", Query.Direction.DESCENDING)
+            .addSnapshotListener { value, error ->
+                if (error != null) trySend(State.failed(error.message ?: "")).isSuccess
+                if (value != null && !value.isEmpty) trySend(State.success(value.toObjects(Post::class.java))).isSuccess
+                else trySend(State.success(emptyList())).isSuccess
+            }
         awaitClose()
     }.catch {
         emit(State.failed(it.message ?: ""))
@@ -43,11 +46,13 @@ class FirestorePostRepository : FirestorePostDataSource {
 
     override fun getPostByUserId(userId: String) = callbackFlow<State<List<Post>>> {
         trySend(State.loading()).isSuccess
-        instance.whereEqualTo("userId", userId).addSnapshotListener { value, error ->
-            if (error != null) trySend(State.failed(error.message ?: "")).isSuccess
-            if (value != null && !value.isEmpty) trySend(State.success(value.toObjects(Post::class.java))).isSuccess
-            else trySend(State.success(emptyList())).isSuccess
-        }
+        instance.whereEqualTo("userId", userId)
+            .orderBy("createdAt", Query.Direction.DESCENDING)
+            .addSnapshotListener { value, error ->
+                if (error != null) trySend(State.failed(error.message ?: "")).isSuccess
+                if (value != null && !value.isEmpty) trySend(State.success(value.toObjects(Post::class.java))).isSuccess
+                else trySend(State.success(emptyList())).isSuccess
+            }
         awaitClose()
     }.catch {
         emit(State.failed(it.message ?: ""))

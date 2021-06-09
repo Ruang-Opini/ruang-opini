@@ -88,10 +88,14 @@ class DetailDiscussionRoomActivity : AppCompatActivity() {
     private inner class SectionPagerAdapter(
         fa: FragmentActivity
     ) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 2
-        override fun createFragment(position: Int): Fragment = PostFragment.newInstance(
-            PostFragment.Companion.GetPost.DISCUSSION_ID_NEW, currentDiscussionId
+        val pageType = listOf(
+            PostFragment.Companion.GetPost.DISCUSSION_POPULAR,
+            PostFragment.Companion.GetPost.DISCUSSION_ID_NEW
         )
+
+        override fun getItemCount(): Int = 2
+        override fun createFragment(position: Int): Fragment =
+            PostFragment.newInstance(pageType[position], currentDiscussionId)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

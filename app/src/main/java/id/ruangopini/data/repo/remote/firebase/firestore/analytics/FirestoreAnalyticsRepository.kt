@@ -135,6 +135,38 @@ class FirestoreAnalyticsRepository : FirestoreAnalyticsDataStore {
         }
     }.flowOn(Dispatchers.IO)
 
+    override fun getPopularDiscussion() = callbackFlow<State<List<DiscussionAnalytics>>> {
+        trySend(State.loading()).isSuccess
+        instance.whereLessThan("createdAt", Timestamp.now())
+            .whereGreaterThan("createdAt", Helpers.getSevenDayAgo())
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    trySend(State.failed(error.message ?: "")).isSuccess
+                    close(error)
+                    return@addSnapshotListener
+                }
+                if (value != null && !value.isEmpty) value.toObjects(Analytics::class.java)
+                    .forEach { data ->
+                        instance.document(data.time ?: "").collection(COLLECTION.DISCUSSION)
+                            .addSnapshotListener { result, error ->
+                                if (error != null) {
+                                    trySend(State.failed(error.message ?: "")).isSuccess
+                                    close(error)
+                                }
+
+                                val discussion = if (result != null && !result.isEmpty)
+                                    result.toObjects(DiscussionAnalytics::class.java)
+                                else emptyList()
+
+                                trySend(State.success(discussion)).isSuccess
+                            }
+                    }
+            }
+        awaitClose()
+    }.catch {
+        emit(State.failed(it.message ?: ""))
+    }.flowOn(Dispatchers.IO)
+
     override fun updateJoinDiscussion(discussionId: String, isJoin: Boolean) =
         flow<State<Boolean>> {
             emit(State.loading())

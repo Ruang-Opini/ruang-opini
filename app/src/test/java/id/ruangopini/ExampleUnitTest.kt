@@ -1,5 +1,8 @@
 package id.ruangopini
 
+import com.google.firebase.Timestamp
+import id.ruangopini.utils.DateFormat
+import id.ruangopini.utils.Helpers.formatDate
 import org.junit.Test
 import java.util.*
 
@@ -71,6 +74,41 @@ class ExampleUnitTest {
         (0 until 3).forEach { list.add(it) }
         list.forEachIndexed { index, i ->
             if (index == list.size - 1) println("$i, $list")
+        }
+    }
+
+    @Test
+    fun testSevenDay() {
+        val now = Timestamp.now()
+        println("now = ${now.formatDate(DateFormat.SHORT)}")
+        val cal = Calendar.getInstance().apply {
+            time = now.toDate()
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        println("now = ${Timestamp(cal.time).toDate()}")
+        val calendar = Calendar.getInstance().apply {
+            time = now.toDate()
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+            add(Calendar.DAY_OF_YEAR, 1)
+        }
+        val aWeekAgo = Timestamp(calendar.time)
+        println("a week ago = ${aWeekAgo.formatDate(DateFormat.SHORT)}")
+        println("a week ago = ${aWeekAgo.toDate()}")
+    }
+
+    @Test
+    fun testLast() {
+        val data = listOf(1)
+        data.forEachIndexed { index, i ->
+            if (index == data.size - 1) {
+                println("this finish, last data is = $i")
+            }
         }
     }
 }

@@ -5,12 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import id.ruangopini.data.model.CategoryAnalytics
 import id.ruangopini.databinding.ItemCategoryTrendingBinding
 
 class TrendingCategoryAdapter(
-    private val context: Context,
-    private val listOfTrending: List<String>
+    private val context: Context
 ) : RecyclerView.Adapter<TrendingCategoryAdapter.ViewHolder>() {
+
+    private val listOfTrending = mutableListOf<CategoryAnalytics>()
+    fun addAll(list: List<CategoryAnalytics>) {
+        listOfTrending.clear()
+        listOfTrending.addAll(list)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -24,7 +31,14 @@ class TrendingCategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        binding.tvTrendingCategory.text = listOfTrending[position]
+        val category = listOfTrending[position]
+        with(binding) {
+            tvTrendingCategory.text = category.name
+            tvAmountOfTrending.text = buildString {
+                append(category.join).append(" Orang membicarakan ini")
+            }
+        }
+
     }
 
     override fun getItemCount(): Int = listOfTrending.size

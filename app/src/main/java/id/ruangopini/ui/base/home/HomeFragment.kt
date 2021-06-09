@@ -49,13 +49,17 @@ class HomeFragment : Fragment() {
         }
 
         model.getTrending()
+        model.getAnotherPopular()
+
         trending = TrendingAdapter(requireContext())
-        anotherPop = TrendingCategoryAdapter(
-            requireContext(),
-            listOf("Korupsi", "Medis", "Transportasi", "BUMN")
-        )
+        anotherPop = TrendingCategoryAdapter(requireContext())
         concatAdapter = ConcatAdapter(header, trending, headerTwo, anotherPop)
         updateAdapter()
+
+        model.category.observe(viewLifecycleOwner, {
+            Log.d("TAG", "trending-another: $it")
+            anotherPop.addAll(it)
+        })
 
         model.trending.observe(viewLifecycleOwner, {
             Log.d("TAG", "trending-twit: $it")

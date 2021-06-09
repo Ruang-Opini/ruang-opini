@@ -4,6 +4,7 @@ import id.ruangopini.data.repo.IMainRepository
 import id.ruangopini.data.repo.MainRepository
 import id.ruangopini.data.repo.RemoteDataSource
 import id.ruangopini.data.repo.remote.firebase.auth.AuthRepository
+import id.ruangopini.data.repo.remote.firebase.firestore.analytics.FirestoreAnalyticsRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.comment.FirestoreCommentRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.discussion.FirestoreDiscussionRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.help.FirestoreHelpRepository
@@ -104,6 +105,7 @@ val useCaseModule = module {
     single { FirestorePostRepository() }
     single { FirestoreCommentRepository() }
     single { FirestoreHelpRepository() }
+    single { FirestoreAnalyticsRepository() }
 }
 
 val viewModelModule = module {
@@ -115,12 +117,12 @@ val viewModelModule = module {
     viewModel { ChangePasswordViewModel(get()) }
     viewModel { ProfileViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
-    viewModel { CreateDiscussionViewModel(get(), get()) }
-    viewModel { HomeViewModel(get(), get()) }
-    viewModel { CreatePostViewModel(get(), get(), get()) }
-    viewModel { PostViewModel(get()) }
-    viewModel { DetailPostViewModel(get(), get()) }
-    viewModel { DetailDiscussionViewModel(get()) }
+    viewModel { CreateDiscussionViewModel(get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { CreatePostViewModel(get(), get(), get(), get()) }
+    viewModel { PostViewModel(get(), get()) }
+    viewModel { DetailPostViewModel(get(), get(), get()) }
+    viewModel { DetailDiscussionViewModel(get(), get()) }
     viewModel { DetailTrendingPolicyViewModel(get()) }
     viewModel { EditProfileViewModel(get(), get()) }
     viewModel { HelpViewModel(get()) }

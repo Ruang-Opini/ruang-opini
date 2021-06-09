@@ -7,8 +7,8 @@ plugins {
 
 ext.majorVersion = 0
 ext.minorVersion = 3
-ext.patchVersion = 4
-ext.preRelease = "beta"
+ext.patchVersion = 9
+ext.preRelease = ""
 ext.minSdkVersion = 21
 
 android {

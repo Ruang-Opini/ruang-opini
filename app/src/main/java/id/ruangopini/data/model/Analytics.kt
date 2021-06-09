@@ -11,17 +11,17 @@ data class CategoryAnalytics(
 )
 
 data class DiscussionAnalytics(
-    val join: Int? = 0,
-    val comment: Int? = 0,
-    val post: Int? = 0,
+    var join: Int? = 0,
+    var comment: Int? = 0,
+    var post: Int? = 0,
     @DocumentId
     val discussionId: String? = null
 )
 
 data class PostAnalytics(
-    val voteUp: Int? = 0,
-    val voteDown: Int? = 0,
-    val comment: Int? = 0,
+    var voteUp: Int? = 0,
+    var voteDown: Int? = 0,
+    var comment: Int? = 0,
     @DocumentId
     val postId: String? = null,
 )

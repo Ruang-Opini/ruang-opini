@@ -166,7 +166,7 @@ class DetailPostActivity : AppCompatActivity() {
         with(layoutCommentBar) {
             btnSend.setOnClickListener {
                 val comment = Comment(edtComment.getPlainText(), userId, post.postId)
-                model.postComment(comment)
+                model.postComment(comment, post.discussionId ?: "")
                 edtComment.setText("")
                 btnSend.chipBackgroundColor = ColorStateList.valueOf(
                     ContextCompat.getColor(applicationContext, R.color.primary_20)

@@ -8,6 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import id.ruangopini.data.model.Post
 import id.ruangopini.data.repo.State
+import id.ruangopini.data.repo.remote.firebase.firestore.analytics.FirestoreAnalyticsRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.post.FirestorePostRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -15,7 +16,8 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class PostViewModel(
-    private val postRepository: FirestorePostRepository
+    private val postRepository: FirestorePostRepository,
+    private val analyticsRepository: FirestoreAnalyticsRepository
 ) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -57,6 +59,7 @@ class PostViewModel(
             postRepository.remoteFromVote(postId, userId, false).collect()
         } else postRepository.remoteFromVote(postId, userId, true).collect()
         postRepository.updateVoteUp(vote, postId).collect()
+        analyticsRepository.updateVoteUpPost(postId, vote).collect()
     }
 
     fun updateVoteDown(vote: Int, postId: String) = viewModelScope.launch {
@@ -66,5 +69,6 @@ class PostViewModel(
             postRepository.remoteFromVote(postId, userId, true).collect()
         } else postRepository.remoteFromVote(postId, userId, false).collect()
         postRepository.updateVoteDown(vote, postId).collect()
+        analyticsRepository.updateVoteDownPost(postId, vote).collect()
     }
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import id.ruangopini.data.model.Discussion
 import id.ruangopini.data.model.Issue
 import id.ruangopini.data.repo.State
+import id.ruangopini.data.repo.remote.firebase.firestore.analytics.FirestoreAnalyticsRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.discussion.FirestoreDiscussionRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.issue.FirestoreIssueRepository
 import id.ruangopini.utils.DialogHelpers
@@ -18,7 +19,8 @@ import kotlinx.coroutines.launch
 
 class CreateDiscussionViewModel(
     private val discussionRepository: FirestoreDiscussionRepository,
-    private val issueRepository: FirestoreIssueRepository
+    private val issueRepository: FirestoreIssueRepository,
+    private val analyticsRepository: FirestoreAnalyticsRepository
 ) : ViewModel() {
 
     private var _isComplete = MutableLiveData<Boolean>()
@@ -64,8 +66,13 @@ class CreateDiscussionViewModel(
                     if (isDialogCreated == true) DialogHelpers.showLoadingDialog(activity)
                 }
                 is State.Success -> {
-                    DialogHelpers.hideLoadingDialog()
-                    activity.finish()
+                    discussion.category?.forEachIndexed { i, category ->
+                        analyticsRepository.updateDiscussion(category).collect()
+                        if (i == discussion.category.size - 1) {
+                            DialogHelpers.hideLoadingDialog()
+                            activity.finish()
+                        }
+                    }
                 }
                 is State.Failed -> {
                     DialogHelpers.hideLoadingDialog()

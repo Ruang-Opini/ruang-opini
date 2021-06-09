@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface FirestoreDiscussionDataSource {
     fun getLatestDiscussionRoom(): Flow<State<List<Discussion>>>
-
-    // TODO: 5/26/2021 get trending discussion
     fun createNewDiscussion(discussion: Discussion): Flow<State<Boolean>>
     fun joinDiscussion(discussionId: String, userId: String): Flow<State<Boolean>>
     fun leaveDiscussion(discussionId: String, userId: String): Flow<State<Boolean>>

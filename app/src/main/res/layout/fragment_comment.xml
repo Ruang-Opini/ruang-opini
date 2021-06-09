@@ -6,14 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.comment.CommentFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCommentPage"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_comment_page" />
+        android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCommentPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_comment_page" />
+
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

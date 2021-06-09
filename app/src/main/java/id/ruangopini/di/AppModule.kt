@@ -110,7 +110,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     viewModel { ReferenceViewModel(get()) }
-    viewModel { DiscussionViewModel(get()) }
+    viewModel { DiscussionViewModel(get(), get()) }
     viewModel { CreateAccountViewModel(get(), get()) }
     viewModel { UploadPhotoViewModel(get(), get()) }
     viewModel { DetailPolicyViewModel(get()) }

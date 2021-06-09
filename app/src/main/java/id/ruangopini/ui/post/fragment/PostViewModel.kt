@@ -52,6 +52,24 @@ class PostViewModel(
         }
     }
 
+    fun getPopularPostInDiscussion(discussionId: String) = viewModelScope.launch {
+        postRepository.getPostByDiscussionId(discussionId).collect {
+            when (it) {
+                is State.Loading -> _isLoading.value = true
+                is State.Success -> {
+                    it.data.let { data ->
+                        val sorted = data.sortedByDescending { dt ->
+                            dt.voteUp?.plus(dt.voteDown ?: 0)?.plus(dt.comment ?: 0)
+                        }
+                        _isLoading.value = false
+                        _post.value = sorted
+                    }
+                }
+                is State.Failed -> _isLoading.value = false
+            }
+        }
+    }
+
     fun updateVoteUp(vote: Int, postId: String) = viewModelScope.launch {
         val userId = Firebase.auth.currentUser?.uid ?: ""
         if (vote == 1) {

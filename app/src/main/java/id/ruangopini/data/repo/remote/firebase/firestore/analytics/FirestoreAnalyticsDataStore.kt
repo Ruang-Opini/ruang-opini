@@ -1,6 +1,7 @@
 package id.ruangopini.data.repo.remote.firebase.firestore.analytics
 
 import id.ruangopini.data.model.CategoryAnalytics
+import id.ruangopini.data.model.DiscussionAnalytics
 import id.ruangopini.data.repo.State
 import kotlinx.coroutines.flow.Flow
 
@@ -13,6 +14,8 @@ interface FirestoreAnalyticsDataStore {
     fun updateJoinDiscussion(discussionId: String, isJoin: Boolean): Flow<State<Boolean>>
     fun updateCommentDiscussion(discussionId: String): Flow<State<Boolean>>
     fun updatePostDiscussion(discussionId: String): Flow<State<Boolean>>
+
+    fun getPopularDiscussion(): Flow<State<List<DiscussionAnalytics>>>
 
     fun updateCommentPost(postId: String): Flow<State<Boolean>>
     fun updateVoteUpPost(postId: String, vote: Int): Flow<State<Boolean>>

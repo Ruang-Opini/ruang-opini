@@ -50,8 +50,8 @@ class DetailDiscussionRoomActivity : AppCompatActivity() {
                 isAlreadyJoin = discussion.members?.find { it == userId }?.isNotEmpty() ?: false
 
                 layoutActionbar.btnJoin.setOnClickListener {
-                    if (isAlreadyJoin) model.leaveDiscussion(discussion.discussionId ?: "")
-                    else model.joinDiscussion(discussion.discussionId ?: "")
+                    if (isAlreadyJoin) model.leaveDiscussion(discussion)
+                    else model.joinDiscussion(discussion)
                 }
 
                 viewPager.adapter = SectionPagerAdapter(this@DetailDiscussionRoomActivity)

@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import id.ruangopini.data.model.Discussion
 import id.ruangopini.data.repo.State
+import id.ruangopini.data.repo.remote.firebase.firestore.analytics.FirestoreAnalyticsRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.discussion.FirestoreDiscussionRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -14,17 +16,29 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class DetailDiscussionViewModel(
-    private val discussionRepository: FirestoreDiscussionRepository
+    private val discussionRepository: FirestoreDiscussionRepository,
+    private val analyticsRepository: FirestoreAnalyticsRepository
 ) : ViewModel() {
 
-    fun joinDiscussion(discussId: String) = viewModelScope.launch {
+    fun joinDiscussion(discussion: Discussion) = viewModelScope.launch {
         val userId = Firebase.auth.currentUser?.uid ?: ""
-        discussionRepository.joinDiscussion(discussId, userId).collect()
+        val discussionId = discussion.discussionId ?: ""
+        discussionRepository.joinDiscussion(discussionId, userId).collect()
+        analyticsRepository.updateJoinDiscussion(discussionId, true).collect()
+        discussion.category?.forEach {
+            analyticsRepository.updateJoinCategory(it, true).collect()
+        }
+
     }
 
-    fun leaveDiscussion(discussId: String) = viewModelScope.launch {
+    fun leaveDiscussion(discussion: Discussion) = viewModelScope.launch {
         val userId = Firebase.auth.currentUser?.uid ?: ""
-        discussionRepository.leaveDiscussion(discussId, userId).collect()
+        val discussionId = discussion.discussionId ?: ""
+        discussionRepository.leaveDiscussion(discussionId, userId).collect()
+        analyticsRepository.updateJoinDiscussion(discussionId, false).collect()
+        discussion.category?.forEach {
+            analyticsRepository.updateJoinCategory(it, false).collect()
+        }
     }
 
     private val _isJoin = MutableLiveData<Boolean>()

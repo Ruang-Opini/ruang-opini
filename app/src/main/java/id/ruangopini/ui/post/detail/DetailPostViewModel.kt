@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import id.ruangopini.data.model.Comment
 import id.ruangopini.data.model.Post
 import id.ruangopini.data.repo.State
+import id.ruangopini.data.repo.remote.firebase.firestore.analytics.FirestoreAnalyticsRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.comment.FirestoreCommentRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.post.FirestorePostRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,7 +19,8 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 class DetailPostViewModel(
     private val postRepository: FirestorePostRepository,
-    private val commentRepository: FirestoreCommentRepository
+    private val commentRepository: FirestoreCommentRepository,
+    private val analyticsRepository: FirestoreAnalyticsRepository
 ) : ViewModel() {
 
     private val _post = MutableLiveData<Post>()
@@ -45,6 +47,7 @@ class DetailPostViewModel(
             postRepository.remoteFromVote(postId, userId, false).collect()
         } else postRepository.remoteFromVote(postId, userId, true).collect()
         postRepository.updateVoteUp(vote, postId).collect()
+        analyticsRepository.updateVoteUpPost(postId, vote).collect()
     }
 
     fun updateVoteDown(vote: Int, postId: String) = viewModelScope.launch {
@@ -54,15 +57,18 @@ class DetailPostViewModel(
             postRepository.remoteFromVote(postId, userId, true).collect()
         } else postRepository.remoteFromVote(postId, userId, false).collect()
         postRepository.updateVoteDown(vote, postId).collect()
+        analyticsRepository.updateVoteDownPost(postId, vote).collect()
     }
 
 
     private val _comment = MutableLiveData<List<Comment>>()
     val comment: LiveData<List<Comment>> get() = _comment
 
-    fun postComment(comment: Comment) = viewModelScope.launch {
+    fun postComment(comment: Comment, discussionId: String) = viewModelScope.launch {
         postRepository.addComment(comment.postId ?: "").collect()
         commentRepository.createComment(comment).collect()
+        analyticsRepository.updateCommentDiscussion(discussionId).collect()
+        analyticsRepository.updateCommentPost(comment.postId ?: "").collect()
     }
 
     fun getComments(postId: String) = viewModelScope.launch {

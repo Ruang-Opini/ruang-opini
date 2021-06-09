@@ -15,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import id.ruangopini.data.model.Post
 import id.ruangopini.data.model.User
 import id.ruangopini.data.repo.State
+import id.ruangopini.data.repo.remote.firebase.firestore.analytics.FirestoreAnalyticsRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.post.FirestorePostRepository
 import id.ruangopini.data.repo.remote.firebase.firestore.user.FirestoreUserRepository
 import id.ruangopini.data.repo.remote.firebase.storage.StorageUserRepository
@@ -29,7 +30,8 @@ import kotlinx.coroutines.launch
 class CreatePostViewModel(
     private val postRepository: FirestorePostRepository,
     private val storageUserRepository: StorageUserRepository,
-    private val userRepository: FirestoreUserRepository
+    private val userRepository: FirestoreUserRepository,
+    private val analyticsRepository: FirestoreAnalyticsRepository
 ) : ViewModel() {
 
     private val currentImage = mutableListOf<String>()
@@ -94,6 +96,7 @@ class CreatePostViewModel(
                         DialogHelpers.showLoadingDialog(activity, "Membuat postingan")
                     }
                     is State.Success -> {
+                        analyticsRepository.updatePostDiscussion(post.discussionId ?: "").collect()
                         Firebase.firestore.collection(COLLECTION.DISCUSSION)
                             .document(post.discussionId ?: "")
                             .update("post", FieldValue.increment(1))

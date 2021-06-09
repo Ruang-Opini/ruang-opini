@@ -174,4 +174,31 @@ object Helpers {
         return TimeAgo.using(this.toDate().time, messages)
     }
 
+    fun getTodayTime(): Timestamp {
+        val cal = Calendar.getInstance().apply {
+            time = Timestamp.now().toDate()
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        return Timestamp(cal.time)
+    }
+
+    fun getSevenDayAgo(): Timestamp = getTimeFromNow(-7)
+    fun getTomorrowTime(): Timestamp = getTimeFromNow(1)
+
+    private fun getTimeFromNow(distance: Int): Timestamp {
+        val cal = Calendar.getInstance().apply {
+            time = Timestamp.now().toDate()
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+            add(Calendar.DAY_OF_YEAR, distance)
+        }
+        return Timestamp(cal.time)
+    }
+
+
 }

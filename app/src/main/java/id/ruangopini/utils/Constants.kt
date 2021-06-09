@@ -11,6 +11,9 @@ object COLLECTION {
     const val POST = "post"
     const val COMMENT = "comment"
     const val HELP = "help"
+    const val ANALYTICS = "analitics"
+
+    const val CATEGORY = "category"
 }
 
 /**
@@ -24,6 +27,7 @@ object STORAGE {
 }
 
 object DateFormat {
+    const val SHORT = "dd-MM-yyyy"
     const val PROFILE = "MMMM yyyy"
     const val POST = "EEEE, dd MMMM yyyy, hh.mm"
 }
